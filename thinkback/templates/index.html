@@ -11,6 +11,12 @@
 		<input id="fileupload" name="myfile" type="file" />
 		<input type="submit" value="submit" id="submit" />
 	</form>
+
+	{% for v in value.problem_list %}
+		<p>{{v.name}}</p>
+	{% endfor %}
+
+	<p>Hello world</p>
 </body>
 
 </html>

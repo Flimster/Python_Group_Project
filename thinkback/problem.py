@@ -1,4 +1,5 @@
 class Problem:
-	def __init__(self, problem, description):
-		self.problem = problem
+	def __init__(self, name, description):
+		self.name = name
 		self.description = description
+	
