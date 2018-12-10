@@ -1,4 +1,5 @@
 from pathlib import Path
+from subprocess import call
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -15,12 +16,11 @@ def about():
 def upload_file():
 	if request.method == 'POST':
 		p = Path('.')
-		print('The method was a post method')
 		tmp = request.files['myfile'].read().decode()
-		print(type(tmp))
 		for file in p.glob('./tests/impl.py'):
 			with open(file, 'w') as f:
 				f.write(tmp)
+	call(["pytest", "-q"]) 
 	return "Success"
 
 if __name__ == '__main__':
