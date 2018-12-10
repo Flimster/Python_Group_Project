@@ -1,0 +1,15 @@
+<<!DOCTYPE html>
+<html>
+    {% extends "base.html" %}
+<head>
+
+</head>
+<body>
+    {% block content %}
+        <form id="problem_file" enctype="multipart/form-data" method="post" action="sum">
+            <input id="fileupload" name="myfile" type="file" />
+            <input type="submit" value="Submit" id="submit" />
+        </form>
+    {% endblock %}
+</body>
+</html>

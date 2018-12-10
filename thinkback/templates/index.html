@@ -1,22 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
+	{% extends "base.html" %}
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+	
 </head>
-
 <body>
-	<form id="problem_file" enctype="multipart/form-data" method="post" action="/upload/sum">
-		<input id="fileupload" name="myfile" type="file" />
-		<input type="submit" value="submit" id="submit" />
-	</form>
-
-	{% for v in value.problem_list %}
-		<p>{{v.name}}</p>
-	{% endfor %}
-
-	<p>Hello world</p>
 </body>
 
 </html>
