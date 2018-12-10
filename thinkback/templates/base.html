@@ -14,14 +14,14 @@
 <body>
 
 <div class="navbar">
-  <a href="index">Home</a>
+  <a href="/">Home</a>
     <div class="dropdown">
         <button class="dropbtn" onclick="myFunction()">Assignments
             <i class="fa fa-caret-down"></i>
         </button>
             <div class="dropdown-content" id="myDropdown">
-                <a href="problems">Problems</a>
-                <a href="past_submissions">Past Submissions</a>
+                <a href="assignments/problems">Active Assigments</a>
+                <a href="assignments/past_submissions">Past Assignments</a>
                 <a href="#">Placeholder</a>
             </div>
         </div>
@@ -33,7 +33,10 @@
             <p>Admodum deserunt intellegam in duo, novum nonumy populo est at, qui an reque ignota constituto. Utinam aperiri equidem te vis. Cu ius velit populo impetus. Et qui ullum nusquam contentiones</p>
         </div>
     </div>
-    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
     <div id="footer">
         &copy; Copyright 2018 by <a href="https://github.com/Flimster/Python_Group_Project">Ingi & Tyler</a>.
     </div>
