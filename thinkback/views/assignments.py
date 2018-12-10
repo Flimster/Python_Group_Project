@@ -1,27 +1,42 @@
-# thinkback/views/assignments.py
+	# thinkback/views/assignments.py
 
-from flask import Blueprint
-from ..models import Project, Problem
+from flask import Blueprint, render_template
+from ..models import Assignment
 
-assignments_blueprint = Blueprint('/assignments', __name__)
+assignment_blueprint = Blueprint('/assignments', __name__)
 
-# Create a project with 10 empty problems
-project1 = Project("Verkefni 1")
-for i in range(10):
-	project1.create_problem("Tmp", "This is description")
+assignment_list = []
 
-@assignments_blueprint.route('/<assignment>', methods=['GET'])
-def get_assignments(assignment):
-	return "Hello world this is assignment {}".format(assignment)
+problem = Assignment("Basics in python")
+problem.create_problem("Hello world", "Simply print out hello world")
+problem.create_problem(
+    "If statements", "Do something simple with if statements")
+problem.create_problem("While loops", "Do something simple with while loops")
+problem.create_problem(
+    "AI", "Use machine learning techniques that you learned to create an AI to determine the probabilty of human destructoin")
+problem2 = Assignment("Advance mathematics in python")
 
-@assignments_blueprint.route('/createAssignment')
-def create_assignment():
-	return "Here you create the assignments {}"
+assignment_list.append(problem)
+assignment_list.append(problem2)
 
-@assignments_blueprint.route('/<assignment>/create_problem')
-def create_problem(assignment):
-	return "Here you create problem for assignment {}".format(assignment)
 
-@assignments_blueprint.route('/<assignment>/<problem>', methods=['GET'])
-def problem_description(assignment, problem):
-	return "Hello world this is assignment {} and problem {}".format(assignment, problem)
+@assignment_blueprint.route('/active_assignments', methods=['GET'])
+def get_active_assignments():
+    return render_template('assignments.html', user_assignments=assignment_list)
+
+
+@assignment_blueprint.route('/active_assignments/<assignment>', methods=['GET'])
+def get_problems(assignment):
+	assignment = get_problems_with_assignment(assignment)
+	print(assignment.name)
+	return render_template('problems.html', assignment=assignment)
+
+def get_problems_with_assignment(name):
+	for assignment in assignment_list:
+		if assignment.name == name:
+			return assignment
+
+
+@assignment_blueprint.route('/active_assignments/<assignment>/<problem>', methods=['GET'])
+def get_assignment_problem(assignment, problem):
+    return "Your assignment is {} and the problem is {}".format(assignment, problem)

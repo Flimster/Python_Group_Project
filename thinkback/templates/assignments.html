@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     {% extends "base.html" %}
 <head>
@@ -6,10 +6,11 @@
 </head>
 <body>
     {% block content %}
-        <form id="problem_file" enctype="multipart/form-data" method="post" action="sum">
-            <input id="fileupload" name="myfile" type="file" />
-            <input type="submit" value="Submit" id="submit" />
-        </form>
-    {% endblock %}
+		{% for assignment in user_assignments %}
+            <h2>
+                <a href="active_assignments/{{assignment.name}}">{{assignment.name}}</a>
+            </h2>
+		{% endfor %}
+	{% endblock %}
 </body>
 </html>

@@ -1,8 +1,9 @@
-class Project:
+class Assignment:
 	def __init__(self, name):
-		self.project_name = name
+		self.name = name
 		self.problem_list = []
 		self.problem_count = 0
+		self.active = True
 
 	def create_problem(self, name, description):
 		self.problem_list.append(Problem(name, description))

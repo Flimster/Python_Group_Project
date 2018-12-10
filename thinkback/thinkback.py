@@ -3,16 +3,17 @@ from subprocess import call
 from flask import Flask, render_template, request
 from .views import about, assignments
 
+
 app = Flask(__name__)
 
 app.register_blueprint(about.about_blueprint)
-app.register_blueprint(assignments.assignments_blueprint)
+app.register_blueprint(assignments.assignment_blueprint)
 
 
 @app.route('/')
 def index():
     return render_template('/index.html')
-	
+
 @app.route('/upload/<problem_name>', methods=['POST'])
 def upload_sum_problem(problem_name):
 	print(problem_name)
@@ -24,6 +25,8 @@ def upload_sum_problem(problem_name):
 	# 			f.write(file_uploaded)
 	# call(["pytest", "-q"]) 
 	return "Success"
+
+
 
 
 if __name__ == '__main__':
