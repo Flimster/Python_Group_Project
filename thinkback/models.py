@@ -1,4 +1,8 @@
-from .problem import Problem
+class Problem:
+	def __init__(self, name, description):
+		self.name = name
+		self.description = description
+	
 
 class Project:
 	def __init__(self):
