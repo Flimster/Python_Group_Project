@@ -1,6 +1,5 @@
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-console.log('got inside!')
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
