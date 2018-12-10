@@ -5,17 +5,15 @@ from ..models import Assignment
 
 assignment_blueprint = Blueprint('/assignments', __name__)
 
+# TODO: Delete this
+# This is used for testing the various routes
 assignment_list = []
-
 problem = Assignment("Basics in python")
 problem.create_problem("Hello world", "Simply print out hello world")
-problem.create_problem(
-    "If statements", "Do something simple with if statements")
+problem.create_problem("If statements", "Do something simple with if statements")
 problem.create_problem("While loops", "Do something simple with while loops")
-problem.create_problem(
-    "AI", "Use machine learning techniques that you learned to create an AI to determine the probabilty of human destructoin")
+problem.create_problem("AI", "Use machine learning techniques that you learned to create an AI to determine the probabilty of human destructoin")
 problem2 = Assignment("Advance mathematics in python")
-
 assignment_list.append(problem)
 assignment_list.append(problem2)
 
