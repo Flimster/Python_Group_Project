@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../static/styles/styles.css">
+<link rel="stylesheet" href="../static/styles/styles.css" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="script.js"></script>
 
 <title>ThinkBack</title>
 {% block head %}
@@ -15,37 +14,19 @@
 <body>
 
 <div class="navbar">
-  <a href="#home">Home</a>
-  <a href="#news">News</a>
-  <div class="dropdown">
-  <button class="dropbtn" onclick="myFunction()">Dropdown
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-content" id="myDropdown">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-  </div> 
-</div>
-
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (!e.target.matches('.dropbtn')) {
-  var myDropdown = document.getElementById("myDropdown");
-    if (myDropdown.classList.contains('show')) {
-      myDropdown.classList.remove('show');
-    }
-  }
-}
-</script>
+  <a href="index">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn" onclick="myFunction()">Assignments
+            <i class="fa fa-caret-down"></i>
+        </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="problems">Problems</a>
+                <a href="past_submissions">Past Submissions</a>
+                <a href="#">Placeholder</a>
+            </div>
+        </div>
+        <a href="about">About Us</a> 
+    </div>
     <div class="banner" style="padding:15px; text-align:center;">
         <div class="banner-content">
             <h1>Placeholder</h1>
@@ -56,5 +37,6 @@ window.onclick = function(e) {
     <div id="footer">
         &copy; Copyright 2018 by <a href="https://github.com/Flimster/Python_Group_Project">Ingi & Tyler</a>.
     </div>
+<script type="text/javascript" src="../static/scripts/dropdown.js"></script>
 </body>
 </html>
