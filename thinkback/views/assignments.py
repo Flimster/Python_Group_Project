@@ -16,6 +16,13 @@ problem.create_problem("AI", "Use machine learning techniques that you learned t
 problem2 = Assignment("Advance mathematics in python")
 assignment_list.append(problem)
 assignment_list.append(problem2)
+#Testing for past assigments
+past_assignment_list = []
+past_problem = Assignment("Number Lists")
+past_problem.create_problem("Create an asc. number list", "33% of grade")
+past_problem.create_problem("Create a desc. number list", "33% of grade")
+past_problem.create_problem("Calculate the std. deviation of all the numbers", "33% of grade")
+past_assignment_list.append(past_problem)
 
 
 @assignment_blueprint.route('/active_assignments', methods=['GET'])
@@ -34,7 +41,26 @@ def get_problems_with_assignment(name):
 		if assignment.name == name:
 			return assignment
 
-
 @assignment_blueprint.route('/active_assignments/<assignment>/<problem>', methods=['GET'])
 def get_assignment_problem(assignment, problem):
     return "Your assignment is {} and the problem is {}".format(assignment, problem)
+
+@assignment_blueprint.route('/past_assignments', methods=['GET'])
+def get_past_assigments():
+	return render_template('past_assignmets.html', past_assignment=past_assignment_list)
+
+def get_past_problems_with_assignments(name):
+	for assignment in past_assignment_list:
+		if assignment.name == name:
+			return assignment
+
+@assignment_blueprint.route('/past_assignments/<assignment>', methods=['GET'])
+def get_past_problems(assignment):
+	print("hello ingi")
+	assignment = get_past_problems_with_assignments(assignment)
+	print(assignment.name)
+	return render_template('problems.html', assignment=assignment)
+
+@assignment_blueprint.route('/past_assignments/<assignment>/<past_problem>', methods=['GET'])
+def get_past_assigment_problem(assignment, past_problem):
+	return "Your past assignment is {} and the problem is {}".format(assignment, past_problem)

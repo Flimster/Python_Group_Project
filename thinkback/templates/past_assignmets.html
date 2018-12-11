@@ -7,11 +7,11 @@
 </head>
 <body>
     {% block content %}
-        {% for assignments in user_assigments %}
+        {% for assignment in past_assignment %}
             <h2>
-                <a href="past_assignmets//{{assignment.name}}">{{assignment.name}}</a>
+                <a href="past_assignments/{{assignment.name}}">{{assignment.name}}</a>
             </h2>
-        {% endor %}
+        {% endfor %}
     {% endblock %}
 </body>
 
