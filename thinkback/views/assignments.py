@@ -39,7 +39,6 @@ def get_problems(assignment):
     the_assignment = get_problems_with_assignment(assignment)
     return render_template('multiple_problems.html', assignment=the_assignment)
 
-
 @assignment_blueprint.route('/active_assignments/<assignment>/<problem>', methods=['GET'])
 def get_problem_details(assignment, problem):
     problem = get_single_problem(assignment, problem)
@@ -55,15 +54,13 @@ def get_past_assigments():
 
 @assignment_blueprint.route('/past_assignments/<assignment>', methods=['GET'])
 def get_past_problems(assignment):
-    print('IM HERE')
     assignment = get_past_problems_with_assignments(assignment)
     return render_template('multiple_problems.html', assignment=assignment)
 
 @assignment_blueprint.route('/past_assignments/<assignment>/<problem>', methods=['GET'])
 def get_past_assigment_problem(assignment, problem):
-    print("GOT IN")
     problem = get_single_past_problem(assignment, problem)
-    return render_template('single_problem.html', problem=problem)
+    return render_template('single_problem.html', assignment=assignment, problem=problem)
 
 
 def get_problems_with_assignment(name):
