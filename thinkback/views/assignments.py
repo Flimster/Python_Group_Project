@@ -1,10 +1,8 @@
 # thinkback/views/assignments.py
 
-from flask import Blueprint, render_template, url_for
 from ..models import Assignment
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, flash, url_for
-from flask import current_app as app
 
 
 assignment_blueprint = Blueprint('/assignments', __name__)
@@ -21,42 +19,23 @@ assignment2 = Assignment("Advance mathematics in python", True)
 assignment_list.append(assignment1)
 assignment_list.append(assignment2)
 #Testing for past assigments
-assignment3 = Assignment("Number Lists", False)
-assignment3.create_problem("Create an asc. number list", "33% of grade")
-assignment3.create_problem("Create a desc. number list", "33% of grade")
-assignment3.create_problem("Calculate the std. deviation of all the numbers", "33% of grade")
-assignment_list.append(assignment2)
+past_assignment_list = []
+past_problem = Assignment("Number Lists")
+past_problem.create_problem("Create an asc. number list", "33% of grade")
+past_problem.create_problem("Create a desc. number list", "33% of grade")
+past_problem.create_problem("Calculate the std. deviation of all the numbers", "33% of grade")
+past_assignment_list.append(past_problem)
 
-@assignment_blueprint.route('/<status>', methods=['GET'])
-def get_assigments(status):
-    if status == 'active_assignments': 
-        return render_template('active_assignments.html', user_assignments=assignment_list)
-    if status == 'past_assignments': 
-        return render_template('past_assignmets.html', past_assignment=assignment_list)
-    else: return "Something went wrong"
 
-@assignment_blueprint.route('/<status>/<assignment>', method=['GET'])
-def get_problem(assignment, status):
-    specific_assignment = get_assigment(assignment, status)
-    return render_template('multiple_problems.html', assignment=specific_assignment)
+@assignment_blueprint.route('/active_assignments', methods=['GET'])
+def get_active_assignments():
+    return render_template('active_assignments.html', user_assignments=assignment_list)
 
-def get_assigment(assignment, status):
-    for assignment in assignment_list:
-        if status == 'active_assignments':
-            if assignment.active == True:
-                return assignment
-        if status == 'past_assignments':
-            if assignment.active == False:
-                return assignment
 
-# @assignment_blueprint.route('/active_assignments', methods=['GET'])
-# def get_active_assignments():
-    
-
-# @assignment_blueprint.route('/active_assignments/<assignment>', methods=['GET'])
-# def get_problems(assignment):
-#     the_assignment = get_problems_with_assignment(assignment)
-#     return render_template('multiple_problems.html', assignment=the_assignment)
+@assignment_blueprint.route('/active_assignments/<assignment>', methods=['GET'])
+def get_problems(assignment):
+    the_assignment = get_problems_with_assignment(assignment)
+    return render_template('multiple_problems.html', assignment=the_assignment)
 
 @assignment_blueprint.route('/active_assignments/<assignment>/<problem>', methods=['GET'])
 def get_problem_details(assignment, problem):
@@ -78,7 +57,7 @@ def get_past_problems(assignment):
 @assignment_blueprint.route('/past_assignments/<assignment>/<problem>', methods=['GET'])
 def get_past_assigment_problem(assignment, problem):
     problem = get_single_past_problem(assignment, problem)
-    return render_template('single_problem.html', problem=problem)
+    return render_template('single_problem.html', assignment=assignment, problem=problem)
 
 
 
