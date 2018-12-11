@@ -8,7 +8,7 @@
     {% block content %}
 		{% for assignment in user_assignments %}
             <h2>
-                <a href="active_assignments/{{assignment.name}}">{{assignment.name}}</a>
+                <a href="{{ url_for('/assignments.get_problems', assignment=assignment.name) }}">{{assignment.name}}</a>
             </h2>
 		{% endfor %}
 	{% endblock %}

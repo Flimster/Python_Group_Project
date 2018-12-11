@@ -9,10 +9,10 @@ app = Flask(__name__)
 app.register_blueprint(about.about_blueprint)
 app.register_blueprint(assignments.assignment_blueprint)
 
-
+@app.route('/index')
 @app.route('/')
 def index():
-    return render_template('/index.html')
+	return render_template('/index.html')
 
 @app.route('/upload/<problem_name>', methods=['POST'])
 def upload_sum_problem(problem_name):
@@ -30,4 +30,4 @@ def upload_sum_problem(problem_name):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)
