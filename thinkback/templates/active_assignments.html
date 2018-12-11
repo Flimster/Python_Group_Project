@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    {% extends "base.html" %}
+<head>
+
+</head>
+<body>
+    {% block content %}
+		{% for assignment in user_assignments %}
+            <h2>
+                <a href="active_assignments/{{assignment.name}}">{{assignment.name}}</a>
+            </h2>
+		{% endfor %}
+	{% endblock %}
+</body>
+</html>
