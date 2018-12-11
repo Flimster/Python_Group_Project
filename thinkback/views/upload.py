@@ -10,8 +10,8 @@ ALLOWED_EXTENSIONS = set(['py'])
 upload = Blueprint('/upload', __name__)
 
 
-@upload.route('/upload/<assignment_name>/<problem_name>', methods=['POST'])
-def upload_file(assignment_name, problem_name):
+@upload.route('/upload/<assignment>/<problem>', methods=['POST'])
+def upload_file(assignment, problem):
     if request.method == 'POST':
         # Check if the post request has a file in it
         has_file(request)
@@ -24,11 +24,11 @@ def upload_file(assignment_name, problem_name):
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            path = create_file_path(problem_name)
+            path = create_file_path(problem.name)
             if not os.path.exists(path):
                 os.makedirs(path)
             save_file_to_path(path, file, filename)
-            return redirect(url_for('/assignments.get_past_assigment_problem', assignment = assignment_name, problem=problem_name))
+            return redirect(url_for('/assignments.get_past_assigment_problem', assignment = assignment, problem=problem))
 
     # TODO: Return error that something went wrong
     return ""
@@ -41,8 +41,8 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def create_file_path(problem_name):
-    path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem_name))
+def create_file_path(problem):
+    path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem.id))
     return path
 
 def save_file_to_path(path, file, secure_filename):
