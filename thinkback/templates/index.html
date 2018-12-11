@@ -3,6 +3,12 @@
 <html lang="en">
 <head>
 	{% extends "base.html" %}
+	{% block content %}
+		<form action="upload" method="POST" enctype="multipart/form-data">
+			<input type="file" name="afile">
+			<input type="submit" value="submit">
+		</form>
+	{% endblock %}
 </head>
 <body>
 </body>
