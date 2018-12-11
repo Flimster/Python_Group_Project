@@ -15,10 +15,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.register_blueprint(about.about_blueprint)
 app.register_blueprint(assignments.assignment_blueprint)
 
-
+@app.route('/index')
 @app.route('/')
 def index():
-    return render_template('/index.html')
+	return render_template('/index.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
