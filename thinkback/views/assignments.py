@@ -25,16 +25,15 @@ def get_active_assignments():
 
 @assignment_blueprint.route('/active_assignments/<assignment>', methods=['GET'])
 def get_problems(assignment):
-	assignment = get_problems_with_assignment(assignment)
-	print(assignment.name)
-	return render_template('problems.html', assignment=assignment)
+	the_assignment = get_problems_with_assignment(assignment)
+	return render_template('problems.html', assignment=the_assignment)
+
+
+@assignment_blueprint.route('/active_assignments/<assignment>/<problem>', methods=['GET'])
+def get_assignment_problem(assignment, problem):
+    return render_template('problem.html', problem=problem)
 
 def get_problems_with_assignment(name):
 	for assignment in assignment_list:
 		if assignment.name == name:
 			return assignment
-
-
-@assignment_blueprint.route('/active_assignments/<assignment>/<problem>', methods=['GET'])
-def get_assignment_problem(assignment, problem):
-    return "Your assignment is {} and the problem is {}".format(assignment, problem)
