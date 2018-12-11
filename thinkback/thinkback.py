@@ -5,7 +5,7 @@ from .views import about, assignments
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, flash, redirect, url_for
 
-UPLOAD_FOLDER = '/uploads/python'
+UPLOAD_FOLDER = './uploads/python'
 ALLOWED_EXTENSIONS = set(['py'])
 
 app = Flask(__name__)
@@ -25,9 +25,8 @@ def upload_file():
 	if request.method == 'POST':
 		# Check if the post request has a file in it
 		if 'file' not in request.files:
-			flash('No file part')
 			return redirect(request.url)
-		print("Go there")
+
 		file = request.files['file']
 		if file.filename == '':
 			flash('No selected file')
