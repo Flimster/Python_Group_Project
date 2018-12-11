@@ -1,5 +1,5 @@
 class Assignment:
-	def __init__(self, name):
+	def __init__(self, name, active):
 		self.name = name
 		self.problem_list = []
 		self.problem_count = 0
