@@ -4,7 +4,6 @@ from flask import Blueprint, render_template, url_for
 from ..models import Assignment
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, flash, url_for
-from flask import current_app as app
 
 
 assignment_blueprint = Blueprint('/assignments', __name__)
