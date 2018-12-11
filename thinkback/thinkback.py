@@ -3,10 +3,11 @@ from pathlib import Path
 from flask import Flask, render_template
 from .views import about, assignments, upload
 
-
+UPLOAD_FOLDER = './uploads/python'
 
 app = Flask(__name__)
 app.secret_key = b'super secret key'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 app.register_blueprint(about.about_blueprint)
