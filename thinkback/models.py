@@ -3,14 +3,15 @@ class Assignment:
 		self.name = name
 		self.problem_list = []
 		self.problem_count = 0
-		self.active = True
+		self.active = active
 
-	def create_problem(self, name, description):
-		self.problem_list.append(Problem(name, description))
+	def create_problem(self, name, desc):
+		self.problem_list.append(Problem(name, desc))
 		self.problem_count += 1
 
 
 class Problem:
-	def __init__(self, name, description):
+	def __init__(self, name, desc):
 		self.name = name
-		self.description = description
+		self.description = desc
+		self.active = True

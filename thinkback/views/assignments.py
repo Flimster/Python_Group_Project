@@ -23,7 +23,7 @@ assignment3 = Assignment("Number Lists", False)
 assignment3.create_problem("Create an asc. number list", "33% of grade")
 assignment3.create_problem("Create a desc. number list", "33% of grade")
 assignment3.create_problem("Calculate the std. deviation of all the numbers", "33% of grade")
-assignment_list.append(assignment2)
+assignment_list.append(assignment3)
 
 @assignment_blueprint.route('/<status>', methods=['GET'])
 def get_assignments(status):
