@@ -1,6 +1,5 @@
 # thinkback/views/assignments.py
 
-from flask import Blueprint, render_template, url_for
 from ..models import Assignment
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, flash, url_for
