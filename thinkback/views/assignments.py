@@ -30,17 +30,21 @@ past_problem.create_problem("Create a desc. number list", "33% of grade")
 past_problem.create_problem("Calculate the std. deviation of all the numbers", "33% of grade")
 past_assignment_list.append(past_problem)
 
+@assignment_blueprint.route('/<status>', methods=['GET'])
+def get_active_assigments(status):
+    if status == 'active_assignments': 
+        return render_template('active_assignments.html', user_assignments=assignment_list)
+    if status == 'past_assignments': "ho"
+    else: return "Something went wrong"
 
-@assignment_blueprint.route('/active_assignments', methods=['GET'])
-def get_active_assignments():
-    return render_template('active_assignments.html', user_assignments=assignment_list)
-
+# @assignment_blueprint.route('/active_assignments', methods=['GET'])
+# def get_active_assignments():
+    
 
 @assignment_blueprint.route('/active_assignments/<assignment>', methods=['GET'])
 def get_problems(assignment):
     the_assignment = get_problems_with_assignment(assignment)
     return render_template('multiple_problems.html', assignment=the_assignment)
-
 
 @assignment_blueprint.route('/active_assignments/<assignment>/<problem>', methods=['GET'])
 def get_problem_details(assignment, problem):
@@ -57,13 +61,11 @@ def get_past_assigments():
 
 @assignment_blueprint.route('/past_assignments/<assignment>', methods=['GET'])
 def get_past_problems(assignment):
-    print('IM HERE')
     assignment = get_past_problems_with_assignments(assignment)
     return render_template('multiple_problems.html', assignment=assignment)
 
 @assignment_blueprint.route('/past_assignments/<assignment>/<problem>', methods=['GET'])
 def get_past_assigment_problem(assignment, problem):
-    print("GOT IN")
     problem = get_single_past_problem(assignment, problem)
     return render_template('single_problem.html', problem=problem)
 
@@ -79,14 +81,13 @@ def get_past_problems_with_assignments(name):
             return assignment
 
 def get_single_past_problem(assignment, problem_name):
-    print("ALSO HERE")
     assignment = get_past_problems_with_assignments(assignment)
     for problem in assignment.problem_list:
         if problem.name == problem_name:
             return problem
 
 def get_single_problem(assignment, problem_name):
-    #assignment = get_problems_with_assignment(assignment)
+    assignment = get_problems_with_assignment(assignment)
     for problem in assignment.problem_list:
         if problem.name == problem_name:
             return problem
