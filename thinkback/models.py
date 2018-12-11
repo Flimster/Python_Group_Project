@@ -1,3 +1,5 @@
+import uuid
+
 class Assignment:
 	def __init__(self, name):
 		self.name = name
@@ -14,3 +16,4 @@ class Problem:
 	def __init__(self, name, description):
 		self.name = name
 		self.description = description
+		self.id = str(uuid.uuid4())
