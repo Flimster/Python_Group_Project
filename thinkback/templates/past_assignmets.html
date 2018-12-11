@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	{% extends "base.html" %}
+<head>
+	
+</head>
+<body>
+    {% block content %}
+        {% for assignments in user_assigments %}
+            <h2>
+                <a href="past_assignmets//{{assignment.name}}">{{assignment.name}}</a>
+            </h2>
+        {% endor %}
+    {% endblock %}
+</body>
+
+</html>
