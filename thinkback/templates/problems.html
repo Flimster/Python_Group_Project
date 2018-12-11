@@ -9,7 +9,7 @@
 	{% block content %}
 	{% for problem in assignment.problem_list %}
 			<h2>
-				<a href="past_assignments/{{assignment.name}}/{{problem.name}}">{{problem.name}}</a>
+				<a href="/past_assignments/{{assignment.name}}/{{problem.name}}">{{problem.name}}</a>
 			</h2>
 		{% endfor %}
 	{% endblock %}
