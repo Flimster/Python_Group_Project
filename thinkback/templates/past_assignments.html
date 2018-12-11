@@ -8,9 +8,11 @@
 <body>
     {% block content %}
         {% for assignment in past_assignment %}
-            <h2>
-                <a href="{{ url_for('/assignments.get_assignments', assignment=assignment.name, status=assignment.active) }}">{{assignment.name, assignment.active}}</a>
-            </h2>
+            {% if assignment.active == False: %}
+                <h2>
+                    <a href="{{ url_for('/assignments.get_problem', assignment=assignment.name, status=assignment.active, link='past_assignments') }}">{{assignment.name, assignment.active}}</a>
+                </h2>
+            {% endif %}
         {% endfor %}
     {% endblock %}
 </body>

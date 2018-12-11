@@ -33,12 +33,15 @@ def get_assignments(status):
         return render_template('past_assignments.html', past_assignment=assignment_list)
     else: return "Something went wrong"
 
-@assignment_blueprint.route('/<status>/<assignment>', methods=['GET'])
-def get_problem(assignment, status):
-    specific_assignment = get_assignment(assignment, status)
+@assignment_blueprint.route('/<link>/<assignment>', methods=['GET'])
+def get_problem(assignment, status, link):
+    specific_assignment = get_assignment(assignment, status, link)
     return render_template('multiple_problems.html', assignment=specific_assignment)
 
-def get_assignment(assignment, status):
+
+#This function is used to look up active or inactive assignments
+@assignment_blueprint.route('/<link>/<assignment>/<assignment_name>')
+def get_assignment(assignment, status, link):
     for assignment in assignment_list:
         if status == 'active_assignments':
             if assignment.active == True:
