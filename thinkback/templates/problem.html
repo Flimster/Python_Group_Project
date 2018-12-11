@@ -4,6 +4,9 @@
 <head>
 </head>
 <body>
-	
+	{% block content %}
+	<h1>{{problem.name}}</h1>
+	<h2>{{problem.description}}</h2>
+	{% endblock %}
 </body>
 </html>
