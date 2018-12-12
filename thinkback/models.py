@@ -4,7 +4,6 @@ import json
 class Assignment:
 	def __init__(self, name, description, active):
 		self.name = name
-		self.description = description
 		self.problem_list = []
 		self.active = active
 
@@ -26,3 +25,8 @@ class Problem:
 	
 	def toJson(self):
 		 return {"name": self.name, "description": self.desc, "id": self.id}
+
+
+class TestCase:
+	def __init__(self, problem_id):
+		self.expected_values_list = []
