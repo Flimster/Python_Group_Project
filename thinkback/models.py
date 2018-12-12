@@ -5,15 +5,13 @@ class Assignment:
 	def __init__(self, name):
 		self.name = name
 		self.problem_list = []
-		self.problem_count = 0
 		self.active = True
 
 	def toJson(self):
-		 return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+		 return {"name": self.name, "problem_list": self.problem_list, "active": self.active }
 
 	def create_problem(self, name, description):
 		self.problem_list.append(Problem(name, description))
-		self.problem_count += 1
 
 
 class Problem:
@@ -23,4 +21,4 @@ class Problem:
 		self.id = str(uuid.uuid4())
 	
 	def toJson(self):
-		 return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+		 return {"name": self.name, "description": self.description, "id": self.id}
