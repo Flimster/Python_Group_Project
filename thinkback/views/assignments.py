@@ -36,19 +36,21 @@ def get_assignment_path(link):
 
 #Broken, havent been able to pass on the correct assigments list
 @assignment_blueprint.route('/<link>/<assignment>', methods=['GET'])
-def get_assignments(link, assignment):
-    return render_template('assignment_problems_list.html', assignment=assignment)
-
-@assignment_blueprint.route('/<link>/<assignment>/<problem>', methods=['GET'])
-def get_assignment_problems(link, assignment):
-    print('IWAS HERE OKAY-------------------------------------')
+def get_assignment(link, assignment):
+    print(assignment)
     find_questions = problems_finder(assignment)
-    return render_template('question_list.html', assignment=find_questions)
+    return render_template('assignment_problems_list.html', assignment=find_questions)
 
-def problems_finder(assignment):
+# @assignment_blueprint.route('/<link>/<assignment>/<problem>', methods=['GET'])
+# def get_assignment_problems(link, assignment):
+#     print('IWAS HERE OKAY-------------------------------------')
+#     return render_template('question_list.html', assignment=find_questions)
+
+def problems_finder(assignment_name):
     for assignment in assignment_list:
-        if assignment.name == assignment_id:
-            return assignment
+        if assignment.name == assignment_name:
+            print(assignment.problem_list)
+            return assignment.problem_list
 
 
 #   def get_problems_with_assignment(name):

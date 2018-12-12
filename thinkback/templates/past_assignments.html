@@ -10,7 +10,7 @@
         {% for assignment in past_assignment %}
             {% if assignment.active == False: %}
                 <h2>
-                    <a href="{{ url_for('/assignments.get_assignments', assignment=assignment.name, link='past_assignments') }}">{{assignment.name}}</a>
+                    <a href="{{ url_for('/assignments.get_assignment', assignment=assignment.name, link='past_assignments') }}">{{assignment.name}}</a>
                 </h2>
             {% endif %}
         {% endfor %}
