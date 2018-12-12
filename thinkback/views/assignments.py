@@ -72,7 +72,6 @@ def upload_file(link, problem_id):
             problem_module = get_file_module(module_path, filename)
             function_name = get_problem_info(problem_id).function_name
             problem_function = getattr(problem_module, function_name)
-            problem_function(1, 2)
             return redirect(request.url)
 
     # TODO: Return error that something went wrong
