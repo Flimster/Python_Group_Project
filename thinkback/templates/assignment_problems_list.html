@@ -6,9 +6,9 @@
 <body>
     <h1>Hi</h1>
     {% block content %}
-        {% for problem in assignment %}
+        {% for problem in assignment.problem_list %}
             <h2>
-                <a href="">{{problem.name}}</a>
+                <a href="{{ url_for('/assignments.get_problems', assignment=assignment.name, link=link, problem=problem.name) }}">{{problem.name}}</a>
             </h2>
         {% endfor %}
     {% endblock %}
