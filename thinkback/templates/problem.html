@@ -10,6 +10,10 @@
 		<h2>
 			{{problem.name, problem.desc}}
 		</h2>
+		<form action="{{ url_for('/upload.upload_file', assignment_name=assignment, problem_id=problem['id'] ) }}" method="POST" enctype="multipart/form-data">
+			<input type="file" name="file">
+			<input type="submit" value="Submit file">
+		</form>
 	{% endblock %}
 </body>
 
