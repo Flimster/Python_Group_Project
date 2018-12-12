@@ -33,13 +33,38 @@
             <p>Admodum deserunt intellegam in duo, novum nonumy populo est at, qui an reque ignota constituto. Utinam aperiri equidem te vis. Cu ius velit populo impetus. Et qui ullum nusquam contentiones</p>
         </div>
     </div>
-    <div id="content">
+
+    <!-- Tab links -->
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+    </div>
+    
+    <!-- Tab content -->
+    <div id="London" class="tabcontent">
+        <h3>London</h3>
+        <p>London is the capital city of England.</p>
+    </div>
+    
+    <div id="Paris" class="tabcontent">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p>
+    </div>
+    
+    <div id="Tokyo" class="tabcontent">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>    
+
+    <div class="content">
         {% block content %}
         {% endblock %}
     </div>
-    <div id="footer">
-        &copy; Copyright 2018 by <a href="https://github.com/Flimster/Python_Group_Project">Ingi & Tyler</a>.
+    <div class="footer">
+        <a href="https://github.com/Flimster/Python_Group_Project">Ingi & Tyler</a>.
     </div>
     <script type=text/javascript src="{{url_for('static', filename='scripts/dropdown.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='scripts/tabs.js') }}"></script>
 </body>
 </html>
