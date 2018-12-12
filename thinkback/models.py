@@ -2,6 +2,7 @@ import os
 import uuid
 import json
 import importlib
+import unittest
 from flask import current_app as app
 
 
@@ -15,20 +16,19 @@ class Assignment:
 		return {"name": self.name, "problem_list": self.problem_list, "active": self.active}
 
 	def create_problem(self, name, desc):
-		self.problem_list.append(Problem(name, desc, "sum_two", self.name))
+		self.problem_list.append(Problem(name, desc, "add", self.name))
 
 
 class Problem:
-	def __init__(self, name, desc, function_name, assignment_name):
+	def __init__(self, name, desc, function, assignment_name):
 		self.name = name
 		self.desc = desc
 		self.assignment_name = assignment_name
-		self.function_name = function_name
+		self.function = function
 		self.id = str(uuid.uuid4())
 
 	def toJson(self):
 		return {"name": self.name, "description": self.desc, "id": self.id}
-
 
 class UploadedFile:
 	def __init__(self, file):
@@ -56,6 +56,15 @@ class UploadedFile:
 		module = importlib.import_module('.{}'.format(filename[0]), package=module_path)
 		return module
 
-class TestCase:
-	def __init__(self, problem_id):
-		self.expected_values_list = []
+
+
+class ProblemTestCases(unittest.TestCase):
+	def __init__(self, correct_func):
+		super().__init__()
+		self.parameter_list = [1, 2, 3]
+		self.correct_func = correct_func
+	
+	def run_tests(self, user_func):
+		for parameter in self.parameter_list:
+			self.assertEqual(user_func(parameter), self.correct_func(parameter))
+			print("Everything was alright")
