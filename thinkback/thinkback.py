@@ -1,7 +1,5 @@
-import os
-from pathlib import Path
 from flask import Flask, render_template
-from .views import about, assignments, upload
+from .views import about, assignments
 
 UPLOAD_FOLDER = './uploads'
 
@@ -12,7 +10,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.register_blueprint(about.about_blueprint)
 app.register_blueprint(assignments.assignment_blueprint)
-app.register_blueprint(upload.upload)
 
 @app.route('/index')
 @app.route('/')
