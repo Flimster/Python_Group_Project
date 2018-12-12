@@ -10,16 +10,18 @@ assignment_blueprint = Blueprint('/assignments', __name__)
 # TODO: Delete this
 # This is used for testing the various routes
 assignment_list = []
-assignment1 = Assignment("Basics in python", True)
+assignment1 = Assignment("Basics in python", "People search for this Lorem ipsum dummy copy text using all kinds of names, such as Lorem ipsum, lorem ipsum dolor sit amet, Lorem, dummy text, loren ipsum (yes, spelled wrong)", True)
 assignment1.create_problem("Hello world", "Simply print out hello world")
 assignment1.create_problem("If statements", "Do something simple with if statements")
 assignment1.create_problem("While loops", "Do something simple with while loops")
 assignment1.create_problem("AI", "Use machine learning techniques that you learned to create an AI to determine the probabilty of human destructoin")
-assignment2 = Assignment("Advance mathematics in python", True)
+assignment2 = Assignment("Advance mathematics in python", "I’ve seen several versions of this Lorem ipsum text on the Internet, with various changes; however, this Lorem Ipsum dummy copy text doesn’t have any odd text sneaked in as I’ve seen in some of the others.", True)
+assignment2.create_problem("TYLER", "Try to be awesome like him")
+assignment2.create_problem("INGI", "The cool kid")
 assignment_list.append(assignment1)
 assignment_list.append(assignment2)
 #Testing for past assigments
-assignment3 = Assignment("Number Lists", False)
+assignment3 = Assignment("Number Lists", "There is an unformatted plain text (.txt) version to either copy/paste or to save the .txt file to your computer. Note: it’s unformatted and will stretch across your screen. ",False)
 assignment3.create_problem("Create an asc. number list", "33% of grade")
 assignment3.create_problem("Create a desc. number list", "33% of grade")
 assignment3.create_problem("Calculate the std. deviation of all the numbers", "33% of grade")
@@ -29,19 +31,13 @@ assignment_list.append(assignment3)
 @assignment_blueprint.route('/<link>', methods=['GET'])
 def get_assignment_path(link):
     if link == 'active_assignments': 
-        return render_template('active_assignments.html', link=link, active_assignments=assignment_list, assignment_list=get_assignment_list(True))
+        return render_template('assignments.html', assignment_list=get_assignment_list(True))
     if link == 'past_assignments': 
-        return render_template('past_assignments.html', link=link, past_assignment=assignment_list, assignment_list=get_assignment_list(True))
+        return render_template('assignments.html', assignment_list=get_assignment_list(False))
     else: return "Something went wrong"
 
-#Broken, havent been able to pass on the correct assigments list
-@assignment_blueprint.route('/<link>/<assignment>', methods=['GET'])
-def get_assignment(link, assignment):
-    find_questions = find_problems_with_assignment(assignment)
-    return render_template('assignment_problems_list.html', link=link , assignment=find_questions)
-
-@assignment_blueprint.route('/<link>/<assignment>/<problem>', methods=['GET'])
-def get_problems(link, assignment, problem):
+@assignment_blueprint.route('/<assignment>/<problem>', methods=['GET'])
+def get_problems(problem, assignment):
     problem = get_problem_info(assignment, problem)
     return render_template('problem.html', problem=problem)
 
