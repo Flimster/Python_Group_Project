@@ -34,23 +34,12 @@ def get_assignment_path(link):
         return render_template('assignments.html', assignment_list=get_assignment_list(True))
     if link == 'past_assignments': 
         return render_template('assignments.html', assignment_list=get_assignment_list(False))
-    else: return "Something went wrong"
+    return "Something went wrong"
 
-@assignment_blueprint.route('/<assignment>/<problem>', methods=['GET'])
-def get_problems(problem, assignment):
-    problem = get_problem_info(assignment, problem)
+@assignment_blueprint.route('/<problem>', methods=['GET'])
+def get_problems(problem):
+    problem = get_problem_info(problem)
     return render_template('problem.html', problem=problem)
-
-def find_problems_with_assignment(assignment_name):
-    for assignment in assignment_list:
-        if assignment.name == assignment_name:
-            return assignment
-
-def get_problem_info(assignment, problem_name):
-    assignment = find_problems_with_assignment(assignment)
-    for problem in assignment.problem_list:
-        if problem.name == problem_name:
-            return problem
 
 def get_assignment_list(status):
     filtered_assignment_list = []
@@ -58,3 +47,20 @@ def get_assignment_list(status):
         if assignment.active == status:
             filtered_assignment_list.append(assignment)
     return filtered_assignment_list
+
+def get_problem_info(problem_id):
+    assignment = find_problems_with_assignment(problem_id)
+    for problem in assignment.problem_list:
+        if problem.name == problem_name:
+            return problem
+
+def find_problems_with_assignment(assignment_name):
+    for assignment in assignment_list:
+        if assignment.name == assignment_name:
+            return assignment
+
+def get_assignment_by_problem_id(problem_id):
+    for assigment in assignment_list:
+        for problem in assigment:
+            if problem.id == problem_id:
+                return problem
