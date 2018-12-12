@@ -11,8 +11,8 @@ class Assignment:
 	def toJson(self):
 		 return {"name": self.name, "problem_list": self.problem_list, "active": self.active }
 
-	def create_problem(self, name, desc, function_name):
-		self.problem_list.append(Problem(name, desc, function_name, self.name))
+	def create_problem(self, name, desc):
+		self.problem_list.append(Problem(name, desc, "sum_two", self.name))
 
 
 

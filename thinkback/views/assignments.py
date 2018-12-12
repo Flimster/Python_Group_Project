@@ -71,7 +71,7 @@ def upload_file(link, assignment_name, problem_id):
 
             module_path = '.uploads.{}'.format(problem_id)
             problem_module = get_file_module(module_path, filename)
-            function_name = get_problem_info(assignment_name, problem_id).function_name
+            function_name = get_problem_info(problem_id).function_name
             problem_function = getattr(problem_module, function_name)
             problem_function(1, 2)
             return redirect(request.url)
@@ -89,7 +89,7 @@ def get_assignment_list(status):
 def get_problem_info(problem_id):
     assignment = find_problems_with_assignment(problem_id)
     for problem in assignment.problem_list:
-        if problem.name == problem_name:
+        if problem.id == problem_id:
             return problem
 
 def find_problems_with_assignment(assignment_name):
@@ -102,3 +102,22 @@ def get_assignment_by_problem_id(problem_id):
         for problem in assigment:
             if problem.id == problem_id:
                 return problem
+
+def has_file(request):
+    if 'file' not in request.files:
+        return redirect(request.url)
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def create_file_path(problem_id):
+    path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem_id))
+    return path
+def save_file_to_path(path, file, secure_filename):
+    file.save(os.path.join(path, secure_filename))
+    file.save(os.path.join(path, '__init__.py'))
+def get_file_module(module_path, filename):
+    print(filename)
+    filename = filename.split('.')
+    module = importlib.import_module(
+        '.{}'.format(filename[0]), package=module_path)
+    return module
