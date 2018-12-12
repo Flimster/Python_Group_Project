@@ -10,14 +10,14 @@ class Assignment:
 	def toJson(self):
 		 return {"name": self.name, "problem_list": self.problem_list, "active": self.active }
 
-	def create_problem(self, name, description):
-		self.problem_list.append(Problem(name, description))
+	def create_problem(self, name, desc):
+		self.problem_list.append(Problem(name, desc))
 
 
 class Problem:
-	def __init__(self, name, description):
+	def __init__(self, name, desc):
 		self.name = name
-		self.description = description
+		self.description = desc
 		self.id = str(uuid.uuid4())
 	
 	def toJson(self):
