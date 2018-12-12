@@ -22,13 +22,16 @@ def upload_file(assignment_name, problem_id):
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			path = create_file_path(problem_id)
+			
 			if not os.path.exists(path):
 				os.makedirs(path)
+		
 			save_file_to_path(path, file, filename)
-			module = importlib.import_module('.0', package=".uploads.07ba14d1-d216-4ef3-b9ad-77a60e04725f")
-			print(module)
-			print(module.sum_two(1, 2))
-			return redirect('/')
+
+			module_path = '.uploads.{}'.format(problem_id) 
+			problem_module = get_file_module(module_path)
+			print(problem_module.sum_two(1, 2))
+			return redirect('/index')
 
 	# TODO: Return error that something went wrong
 	return ""
@@ -48,6 +51,10 @@ def create_file_path(problem_id):
 	path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem_id))
 	return path
 
-
 def save_file_to_path(path, file, secure_filename):
 	file.save(os.path.join(path, secure_filename))
+	file.save(os.path.join(path, '__init__.py'))
+
+def get_file_module(module_path):
+	module = importlib.import_module('.0', package=module_path)
+	return module
