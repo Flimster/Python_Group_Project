@@ -7,11 +7,9 @@
 </head>
 <body>
 	{% block content %}
-	{% for problem in assignment.problem_list %}
-			<h2>
-				<a href="">{{problem.name, problem.desc}}</a>
-			</h2>
-		{% endfor %}
+		<h2>
+			{{problem.name, problem.desc}}
+		</h2>
 	{% endblock %}
 </body>
 

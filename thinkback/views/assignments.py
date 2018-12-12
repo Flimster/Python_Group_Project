@@ -29,26 +29,25 @@ assignment_list.append(assignment3)
 @assignment_blueprint.route('/<link>', methods=['GET'])
 def get_assignment_path(link):
     if link == 'active_assignments': 
-        return render_template('active_assignments.html', active_assignments=assignment_list)
+        return render_template('active_assignments.html', link=link, active_assignments=assignment_list)
     if link == 'past_assignments': 
-        return render_template('past_assignments.html', past_assignment=assignment_list)
+        return render_template('past_assignments.html', link=link, past_assignment=assignment_list)
     else: return "Something went wrong"
 
 #Broken, havent been able to pass on the correct assigments list
 @assignment_blueprint.route('/<link>/<assignment>', methods=['GET'])
 def get_assignment(link, assignment):
     find_questions = problems_finder(assignment)
-    return render_template('assignment_problems_list.html', assignment=find_questions)
+    return render_template('assignment_problems_list.html', link=link , assignment=find_questions)
 
 @assignment_blueprint.route('/<link>/<assignment>/<problem>', methods=['GET'])
 def get_problems(link, assignment, problem):
     print('IWAS HERE OKAY-------------------------------------')
     return render_template('problem.html', problem=problem)
-    
+
 def problems_finder(assignment_name):
     for assignment in assignment_list:
         if assignment.name == assignment_name:
-            print(assignment.problem_list)
             return assignment
 
 
