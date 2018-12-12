@@ -32,14 +32,16 @@
             <h1>Placeholder</h1>
             <p>Admodum deserunt intellegam in duo, novum nonumy populo est at, qui an reque ignota constituto. Utinam aperiri equidem te vis. Cu ius velit populo impetus. Et qui ullum nusquam contentiones</p>
         </div>
-    </div>
-    <div id="content">
+    </div> 
+
+    <div class="content">
         {% block content %}
         {% endblock %}
     </div>
-    <div id="footer">
-        &copy; Copyright 2018 by <a href="https://github.com/Flimster/Python_Group_Project">Ingi & Tyler</a>.
+    <div class="footer">
+        <a href="https://github.com/Flimster/Python_Group_Project">Ingi & Tyler</a>.
     </div>
     <script type=text/javascript src="{{url_for('static', filename='scripts/dropdown.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='scripts/tabs.js') }}"></script>
 </body>
 </html>
