@@ -3,7 +3,7 @@ from pathlib import Path
 from flask import Flask, render_template
 from .views import about, assignments, upload
 
-UPLOAD_FOLDER = './uploads/python'
+UPLOAD_FOLDER = './uploads'
 
 app = Flask(__name__)
 app.secret_key = b'super secret key'

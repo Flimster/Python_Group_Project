@@ -1,25 +1,22 @@
 import os
-import json
+import importlib
 from flask import current_app as app
 from werkzeug.utils import secure_filename
-from flask import Flask, Blueprint, render_template, request, flash, redirect, url_for
-import re
+from flask import Flask, Blueprint, request, redirect, url_for
 
 
-UPLOAD_FOLDER = './uploads/python'
 ALLOWED_EXTENSIONS = set(['py'])
 
 upload = Blueprint('/upload', __name__)
 
 
-@upload.route('/upload/<assignment_name>/<problem_id>', methods=['POST'])
+@upload.route('/uploads/python/<assignment_name>/<problem_id>', methods=['POST'])
 def upload_file(assignment_name, problem_id):
 	if request.method == 'POST':
 		# Check if the post request has a file in it
 		file = request.files['file'] 
 
 		if file.filename == '':
-				flash('No selected file')
 				return redirect(request.url)
 
 		if file and allowed_file(file.filename):
@@ -28,7 +25,10 @@ def upload_file(assignment_name, problem_id):
 			if not os.path.exists(path):
 				os.makedirs(path)
 			save_file_to_path(path, file, filename)
-			return redirect(url_for('/assignments.get_past_assigment_problem', assignment=assignment_name, problem=problem_id))
+			module = importlib.import_module('.0', package=".uploads.07ba14d1-d216-4ef3-b9ad-77a60e04725f")
+			print(module)
+			print(module.sum_two(1, 2))
+			return redirect('/')
 
 	# TODO: Return error that something went wrong
 	return ""
