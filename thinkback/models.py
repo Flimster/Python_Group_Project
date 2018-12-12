@@ -2,7 +2,7 @@ import uuid
 import json
 
 class Assignment:
-	def __init__(self, name):
+	def __init__(self, name, active):
 		self.name = name
 		self.problem_list = []
 		self.active = True
