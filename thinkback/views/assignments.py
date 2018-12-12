@@ -25,6 +25,7 @@ assignment3.create_problem("Create a desc. number list", "33% of grade")
 assignment3.create_problem("Calculate the std. deviation of all the numbers", "33% of grade")
 assignment_list.append(assignment3)
 
+#Gives the right path to the 'link' coming in, and also gets a right question list
 @assignment_blueprint.route('/<link>', methods=['GET'])
 def get_assignment_path(link):
     if link == 'active_assignments': 
@@ -33,22 +34,23 @@ def get_assignment_path(link):
         return render_template('past_assignments.html', past_assignment=assignment_list)
     else: return "Something went wrong"
 
+#Broken, havent been able to pass on the correct assigments list
 @assignment_blueprint.route('/<link>/<assignment>', methods=['GET'])
-def get_problems(link, assignment):
-    #print(assignment, link)
-    return render_template('multiple_problems.html', assignment=assignment_list)
+def get_assignments(link, assignment):
+    return render_template('assignment_problems_list.html', assignment=assignment)
 
 @assignment_blueprint.route('/<link>/<assignment>/<problem>', methods=['GET'])
-def get_problem_questions(link, assignment, question):
-    find_questions = question_finder(assignment)
+def get_assignment_problems(link, assignment):
+    print('IWAS HERE OKAY-------------------------------------')
+    find_questions = problems_finder(assignment)
     return render_template('question_list.html', assignment=find_questions)
 
-
-def question_finder(assignment_id):
+def problems_finder(assignment):
     for assignment in assignment_list:
         if assignment.name == assignment_id:
             return assignment
-        
+
+
 #   def get_problems_with_assignment(name):
 #     for assignment in assignment_list:
 #         if assignment.name == name:
