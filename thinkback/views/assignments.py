@@ -35,7 +35,6 @@ assignment_list.append(assignment3)
 
 # Gives the right path to the 'link' coming in, and also gets a right question list
 
-
 @assignment_blueprint.route('/<link>', methods=['GET'])
 def get_assignment_path(link):
     if link == 'active_assignments': 
@@ -44,14 +43,14 @@ def get_assignment_path(link):
         return render_template('assignments.html', assignment_list=get_assignment_list(False))
     return "Something went wrong"
 
-@assignment_blueprint.route('/<problem>', methods=['GET'])
-def get_problems(problem):
+@assignment_blueprint.route('/<link>/<problem>', methods=['GET'])
+def get_problems(link, problem):
     problem = get_problem_info(problem)
-    return render_template('problem.html', problem=problem)
+    return render_template('problem.html', link=link, problem=problem)
 
-@assignment_blueprint.route('/<link>/<assignment_name>/<problem_id>', methods=['POST'])
-def upload_file(link, assignment_name, problem_id):
-    """Uploads a file to the server"""
+
+@assignment_blueprint.route('/<link>/<problem_id>', methods=['POST'])
+def upload_file(link, problem_id):
     if request.method == 'POST':
         # Check if the post request has a file in it
         file = request.files['file']
@@ -87,21 +86,16 @@ def get_assignment_list(status):
     return filtered_assignment_list
 
 def get_problem_info(problem_id):
-    assignment = find_problems_with_assignment(problem_id)
+    assignment = get_assignment_by_problem_id(problem_id)
     for problem in assignment.problem_list:
         if problem.id == problem_id:
             return problem
 
-def find_problems_with_assignment(assignment_name):
-    for assignment in assignment_list:
-        if assignment.name == assignment_name:
-            return assignment
-
 def get_assignment_by_problem_id(problem_id):
     for assigment in assignment_list:
-        for problem in assigment:
+        for problem in assigment.problem_list:
             if problem.id == problem_id:
-                return problem
+                return assigment
 
 def has_file(request):
     if 'file' not in request.files:
@@ -109,14 +103,16 @@ def has_file(request):
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 def create_file_path(problem_id):
     path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem_id))
     return path
+
 def save_file_to_path(path, file, secure_filename):
     file.save(os.path.join(path, secure_filename))
     file.save(os.path.join(path, '__init__.py'))
+
 def get_file_module(module_path, filename):
-    print(filename)
     filename = filename.split('.')
     module = importlib.import_module(
         '.{}'.format(filename[0]), package=module_path)
