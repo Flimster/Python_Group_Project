@@ -14,7 +14,7 @@
         {% for assignment in assignment_list %}
             {% for problem in assignment.problem_list %}
                 <div id="{{assignment.name}}" class="tabcontent">
-                    <a href="{{ url_for('/assignments.get_problems', link=assignment.active, problem=problem.id) }}">{{problem.name}}</a>
+                    <a href="{{ url_for('/assignments.get_problems', link=assignment.active, problem_id=problem.id) }}">{{problem.name}}</a>
                     <p>{{ problem.desc }}</p>
                 </div>
             {% endfor %}

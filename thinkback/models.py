@@ -1,6 +1,4 @@
 import os
-import uuid
-import json
 import importlib
 import unittest
 from flask import current_app as app
@@ -17,12 +15,12 @@ class Assignment:
 		return '{} {} {}'.format(self.id, self.name, self.active)
 
 class Problem:
-	def __init__(self, name, desc, function, assignment_id):
+	def __init__(self, id, assignment_id, name, desc, function):
+		self.id = id
+		self.assignment_id = assignment_id
 		self.name = name
 		self.desc = desc
-		self.assignment_id = assignment_id
 		self.function = function
-		self.id = str(uuid.uuid4())
 		
 class UploadedFile:
 	def __init__(self, file):
