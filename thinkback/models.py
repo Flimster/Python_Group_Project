@@ -4,8 +4,6 @@ import json
 class Assignment:
 	def __init__(self, name, description, active):
 		self.name = name
-		self.description = description
-		self.problem_list = []
 		self.active = active
 
 	def toJson(self):
