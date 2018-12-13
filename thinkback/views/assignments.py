@@ -1,11 +1,12 @@
 # thinkback/views/assignments.py
 
 import os
+import sqlite3
 import importlib
 from ..models import Assignment
 from flask import current_app as app
 from werkzeug.utils import secure_filename
-from flask import Blueprint, render_template, request, redirect, flash, url_for
+from flask import Blueprint, render_template, request, redirect, flash, url_for, g
 
 ALLOWED_EXTENSIONS = set(['py'])
 
@@ -52,34 +53,34 @@ def get_problems(link, problem):
     return render_template('problem.html', link=link, problem=problem)
 
 
-@assignment_blueprint.route('/<link>/<problem_id>', methods=['POST'])
-def upload_file(link, problem_id):
-    if request.method == 'POST':
-        # Check if the post request has a file in it
-        file = request.files['file']
+# @assignment_blueprint.route('/<link>/<problem_id>', methods=['POST'])
+# def upload_file(link, problem_id):
+#     if request.method == 'POST':
+#         # Check if the post request has a file in it
+#         file = request.files['file']
 
-        if file.filename == '':
-            flash("Something went wrong")
-            return redirect(request.url)
+#         if file.filename == '':
+#             flash("Something went wrong")
+#             return redirect(request.url)
 
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            path = create_file_path(problem_id)
+#         if file and allowed_file(file.filename):
+#             filename = secure_filename(file.filename)
+#             path = create_file_path(problem_id)
 
-            if not os.path.exists(path):
-                os.makedirs(path)
+#             if not os.path.exists(path):
+#                 os.makedirs(path)
 
-            save_file_to_path(path, file, filename)
+#             save_file_to_path(path, file, filename)
 
-            module_path = '.uploads.{}'.format(problem_id)
-            problem_module = get_file_module(module_path, filename)
-            function_name = get_problem_info(problem_id).function_name
-            problem_function = getattr(problem_module, function_name)
-            problem_function(1, 2)
-            return redirect(request.url)
+#             module_path = '.uploads.{}'.format(problem_id)
+#             problem_module = get_file_module(module_path, filename)
+#             function_name = get_problem_info(problem_id).function_name
+#             problem_function = getattr(problem_module, function_name)
+#             problem_function(1, 2)
+#             return redirect(request.url)
 
-    # TODO: Return error that something went wrong
-    return ""
+#     # TODO: Return error that something went wrong
+#     return ""
 
 def get_assignment_list(status):
     filtered_assignment_list = []
@@ -100,40 +101,63 @@ def get_assignment_by_problem_id(problem_id):
             if problem.id == problem_id:
                 return assigment
 
-def has_file(request):
-    if 'file' not in request.files:
-        return redirect(request.url)
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+# def has_file(request):
+#     if 'file' not in request.files:
+#         return redirect(request.url)
+# def allowed_file(filename):
+#     return '.' in filename and \
+#            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def create_file_path(problem_id):
-    path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem_id))
-    return path
+# def create_file_path(problem_id):
+#     path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem_id))
+#     return path
 
-def save_file_to_path(path, file, secure_filename):
-    file.save(os.path.join(path, secure_filename))
-    file.save(os.path.join(path, '__init__.py'))
+# def save_file_to_path(path, file, secure_filename):
+#     file.save(os.path.join(path, secure_filename))
+#     file.save(os.path.join(path, '__init__.py'))
 
-def get_file_module(module_path, filename):
-    filename = filename.split('.')
-    module = importlib.import_module(
-        '.{}'.format(filename[0]), package=module_path)
-    return module
+# def get_file_module(module_path, filename):
+#     filename = filename.split('.')
+#     module = importlib.import_module(
+#         '.{}'.format(filename[0]), package=module_path)
+#     return module
 
 def get_db_assignments():
-    db = app.get_db()
-    cur = db.execute('select * from assignment')
+    db = get_db()
+    cur = db.execute('select * from assignments')
     entries = cur.fetchall()
-    print(entries)
-    return 0#render_template('/', entries=entries)
+    print(entries[-1]['a_nafn'])
+    return entries
 
 def get_db_problems():
-    db = app.get_db()
+    db = get_db()
     cur = db.execute('select * from problems')
     entries = cur.fetchall()
     print(entries)
     return type(entries)#render_template('/', entries=entries)
 
-# test = get_db_problems()
-# get_db_problems()
+def connect_db():
+    print("""Connects to the specific database.""")
+    rv = sqlite3.connect(app.config['DATABASE'])
+    rv.row_factory = sqlite3.Row
+    return rv
+
+def get_db():
+    print("""Opens a new database connection if there is none yet for the
+	current application context.
+	""")
+    if not hasattr(g, 'flaskr.db'):
+        g.sqlite_db = connect_db()
+    return g.sqlite_db
+
+def init_db():
+    db = get_db()
+    with app.open_resource('schema.sql', mode='r') as f:
+        db.cursor().executescript(f.read())
+    db.commit()
+
+def drop_db():
+    db = get_db()
+    with app.open_resource('drop.sql', mode='r') as f:
+        db.cursor().executescript(f.read())
+    db.commit()

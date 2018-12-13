@@ -1,6 +1,6 @@
 PRAGMA foreign_keys = ON;
 
-create table assigments
+create table assignments
 (
 	a_id integer
 		constraint assigment_pk
@@ -15,22 +15,22 @@ create table problems
 		constraint problems_pk
 			primary key autoincrement,
 	a_id integer
-		constraint problems_assigments_a_id_fk
-			references assigments,
+		constraint problems_assignments_a_id_fk
+			references assignments,
 	p_name text,
 	p_desc text,
 	p_solution_name text
 );
 
-insert into assigments(a_nafn, a_active) values ('Basics in Pyton', 1);
-insert into assigments(a_nafn, a_active) values ('Advanced Mathematics', 1);
-insert into assigments(a_nafn, a_active) values ('Discrete Mathematics', 0);
-insert into assigments(a_nafn, a_active) values ('Quantum Calulations', 0);
-insert into assigments(a_nafn, a_active) values ('Tic Tac Toe', 1);
-insert into assigments(a_nafn, a_active) values ('Hangman', 0);
-insert into assigments(a_nafn, a_active) values ('Texas hold em', 1);
-insert into assigments(a_nafn, a_active) values ('String lists', 1);
-insert into assigments(a_nafn, a_active) values ('Dictionaries', 0);
+insert into assignments(a_nafn, a_active) values ('Basics in Pyton', 1);
+insert into assignments(a_nafn, a_active) values ('Advanced Mathematics', 1);
+insert into assignments(a_nafn, a_active) values ('Discrete Mathematics', 0);
+insert into assignments(a_nafn, a_active) values ('Quantum Calulations', 0);
+insert into assignments(a_nafn, a_active) values ('Tic Tac Toe', 1);
+insert into assignments(a_nafn, a_active) values ('Hangman', 0);
+insert into assignments(a_nafn, a_active) values ('Texas hold em', 1);
+insert into assignments(a_nafn, a_active) values ('String lists', 1);
+insert into assignments(a_nafn, a_active) values ('Dictionaries', 0);
 
 insert into problems(a_id, p_name, p_desc, p_solution_name) values (1, 'Create Hello World', 'Create and app that prints out hello world', 'hello_world');
 insert into problems(a_id, p_name, p_desc, p_solution_name) values (1, 'Sum of two numbers', 'Create an app that calculates the sum of two numbers', 'two_sum');
