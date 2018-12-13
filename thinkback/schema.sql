@@ -1,11 +1,23 @@
-CREATE TABLE Assignment (
-    a_name TEXT,
-    a_active INT
+PRAGMA foreign_keys = ON;
+
+create table assigments
+(
+	a_id integer
+		constraint assigment_pk
+			primary key autoincrement,
+	a_nafn text,
+	a_active integer
 );
 
-CREATE TABLE Problem (
-    p_id TEXT PRIMARY KEY,
-    p_name TEXT,
-    p_desc TEXT,
-    p_assignment_name TEXT,
-    p_function_name TEXT);
+create table problems
+(
+	p_id integer
+		constraint problems_pk
+			primary key autoincrement,
+	a_id integer
+		constraint problems_assigments_a_id_fk
+			references assigments,
+	p_name text,
+	p_desc text,
+	p_solution_name text
+);
