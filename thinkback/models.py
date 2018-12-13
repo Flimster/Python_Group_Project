@@ -15,15 +15,11 @@ class Assignment:
 	def __str__(self):
 		return '{} {} {}'.format(self.id, self.name, self.active)
 
-	def create_problem(self, name, desc):
-		self.problem_list.append(Problem(name, desc, "add", self.name))
-
-
 class Problem:
-	def __init__(self, name, desc, function, assignment_name):
+	def __init__(self, name, desc, function, assignment_id):
 		self.name = name
 		self.desc = desc
-		self.assignment_name = assignment_name
+		self.assignment_id = assignment_id
 		self.function = function
 		self.id = str(uuid.uuid4())
 		
