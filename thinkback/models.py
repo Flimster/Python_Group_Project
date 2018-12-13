@@ -11,6 +11,7 @@ class Assignment:
 		self.id = id
 		self.name = name
 		self.active = active
+		self.problem_list = []
 
 	def __str__(self):
 		return '{} {} {}'.format(self.id, self.name, self.active)
