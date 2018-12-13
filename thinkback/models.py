@@ -7,11 +7,13 @@ from flask import current_app as app
 
 
 class Assignment:
-	def __init__(self, name, description, active):
-		self.id = str(uuid.uuid4())
+	def __init__(self, id, name, active):
+		self.id = id
 		self.name = name
 		self.active = active
-		self.problem_list = []
+
+	def __str__(self):
+		return '{} {} {}'.format(self.id, self.name, self.active)
 
 	def create_problem(self, name, desc):
 		self.problem_list.append(Problem(name, desc, "add", self.name))

@@ -76,15 +76,7 @@ def drop_db():
 @app.route('/index')
 @app.route('/')
 def index():
-	get_db_assignments()
 	return render_template('/index.html')
-
-def get_db_assignments():
-	db = get_db()
-	cur = db.execute('select * from assignments')
-	entries = cur.fetchall()
-	return render_template('index.html', entries=entries)
-
 
 if __name__ == '__main__':
 	app.config['SESSION_TYPE'] = 'filesystem'

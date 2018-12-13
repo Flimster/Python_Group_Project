@@ -17,34 +17,33 @@ assignment_blueprint = Blueprint('/assignments', __name__)
 
 assignment_list = []
 
-assignment1 = Assignment("Basics in python", "People search for this Lorem ipsum dummy copy text using all kinds of names, such as Lorem ipsum, lorem ipsum dolor sit amet, Lorem, dummy text, loren ipsum (yes, spelled wrong)", True)
-assignment1.create_problem("Hello world", "Simply print out hello world")
-assignment1.create_problem("If statements", "Do something simple with if statements")
-assignment1.create_problem("While loops", "Do something simple with while loops")
-assignment1.create_problem("AI", "Use machine learning techniques that you learned to create an AI to determine the probabilty of human destructoin")
-assignment2 = Assignment("Advance mathematics in python", "I’ve seen several versions of this Lorem ipsum text on the Internet, with various changes; however, this Lorem Ipsum dummy copy text doesn’t have any odd text sneaked in as I’ve seen in some of the others.", True)
-assignment2.create_problem("TYLER", "Try to be awesome like him")
-assignment2.create_problem("INGI", "The cool kid")
-assignment_list.append(assignment1)
-assignment_list.append(assignment2)
-#Testing for past assigments
-assignment3 = Assignment("Number Lists", "There is an unformatted plain text (.txt) version to either copy/paste or to save the .txt file to your computer. Note: it’s unformatted and will stretch across your screen. ",False)
-assignment3.create_problem("Create an asc. number list", "33% of grade")
-assignment3.create_problem("Create a desc. number list", "33% of grade")
-assignment3.create_problem(
-    "Calculate the std. deviation of all the numbers", "33% of grade")
-assignment_list.append(assignment3)
+# assignment1 = Assignment("Basics in python", "People search for this Lorem ipsum dummy copy text using all kinds of names, such as Lorem ipsum, lorem ipsum dolor sit amet, Lorem, dummy text, loren ipsum (yes, spelled wrong)", True)
+# assignment1.create_problem("Hello world", "Simply print out hello world")
+# assignment1.create_problem("If statements", "Do something simple with if statements")
+# assignment1.create_problem("While loops", "Do something simple with while loops")
+# assignment1.create_problem("AI", "Use machine learning techniques that you learned to create an AI to determine the probabilty of human destructoin")
+# assignment2 = Assignment("Advance mathematics in python", "I’ve seen several versions of this Lorem ipsum text on the Internet, with various changes; however, this Lorem Ipsum dummy copy text doesn’t have any odd text sneaked in as I’ve seen in some of the others.", True)
+# assignment2.create_problem("TYLER", "Try to be awesome like him")
+# assignment2.create_problem("INGI", "The cool kid")
+# assignment_list.append(assignment1)
+# assignment_list.append(assignment2)
+# #Testing for past assigments
+# assignment3 = Assignment("Number Lists", "There is an unformatted plain text (.txt) version to either copy/paste or to save the .txt file to your computer. Note: it’s unformatted and will stretch across your screen. ",False)
+# assignment3.create_problem("Create an asc. number list", "33% of grade")
+# assignment3.create_problem("Create a desc. number list", "33% of grade")
+# assignment3.create_problem(
+#     "Calculate the std. deviation of all the numbers", "33% of grade")
+# assignment_list.append(assignment3)
 
 # Gives the right path to the 'link' coming in, and also gets a right question list
 
 @assignment_blueprint.route('/<link>', methods=['GET'])
 def get_assignment_path(link):
-    test = get_db_assignments()
-    print(test)
+    assignments = get_db_assignments()
     if link == 'active_assignments': 
-        return render_template('assignments.html', assignment_list=get_assignment_list(True))
+        return render_template('assignments.html', assignment_list=filter_assignments(1))
     if link == 'past_assignments': 
-        return render_template('assignments.html', assignment_list=get_assignment_list(False))
+        return render_template('assignments.html', assignment_list=filter_assignments(0))
     return "Something went wrong"
 
 @assignment_blueprint.route('/<link>/<problem>', methods=['GET'])
@@ -82,9 +81,10 @@ def get_problems(link, problem):
 #     # TODO: Return error that something went wrong
 #     return ""
 
-def get_assignment_list(status):
+def filter_assignments(status):
+    assignments_db = get_db_assignments()
     filtered_assignment_list = []
-    for assignment in assignment_list:
+    for assignment in assignments_db:
         if assignment.active == status:
             filtered_assignment_list.append(assignment)
     return filtered_assignment_list
@@ -101,33 +101,14 @@ def get_assignment_by_problem_id(problem_id):
             if problem.id == problem_id:
                 return assigment
 
-# def has_file(request):
-#     if 'file' not in request.files:
-#         return redirect(request.url)
-# def allowed_file(filename):
-#     return '.' in filename and \
-#            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-# def create_file_path(problem_id):
-#     path = os.path.join(app.config['UPLOAD_FOLDER'], ''.join(problem_id))
-#     return path
-
-# def save_file_to_path(path, file, secure_filename):
-#     file.save(os.path.join(path, secure_filename))
-#     file.save(os.path.join(path, '__init__.py'))
-
-# def get_file_module(module_path, filename):
-#     filename = filename.split('.')
-#     module = importlib.import_module(
-#         '.{}'.format(filename[0]), package=module_path)
-#     return module
-
 def get_db_assignments():
+    assignment_list = []
     db = get_db()
     cur = db.execute('select * from assignments')
     entries = cur.fetchall()
-    print(entries[-1]['a_nafn'])
-    return entries
+    for assignment in entries:
+        assignment_list.append(Assignment(assignment['a_id'], assignment['a_name'], assignment['a_active']))
+    return assignment_list
 
 def get_db_problems():
     db = get_db()
