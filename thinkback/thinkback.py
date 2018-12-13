@@ -26,12 +26,14 @@ if __name__ == '__main__':
 
 app.config.from_object(__name__)  # load config from this file , flaskr.py
 # Load default config and override config from an environment variable
+
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'flaskr.db'),
     SECRET_KEY='super secret key',
     USERNAME='admin',
     PASSWORD='default'
 ))
+
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
@@ -80,18 +82,3 @@ def drop_db():
     with app.open_resource('drop.sql', mode='r') as f:
         db.cursor().executescript(f.read())
     db.commit()
-
-
-@app.route('/add', methods=['POST'])
-def add_entry():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    print(request.form)
-    # db = get_db()
-    # db.execute(
-    #     'insert into Assignment (a_name, a_active) values (?, ?)', ('Project 42', 1))
-    # db.commit()
-    # flash('New entry was successfully posted')
-    return redirect(url_for('index'))
-
-
