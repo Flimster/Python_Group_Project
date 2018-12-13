@@ -70,7 +70,7 @@ def init_db():
 def drop_db_command():
     print("Dropping database.")
     drop_db()
-    print("Dropped databse.")
+    print("Dropped database.")
 
 def drop_db():
     db = get_db()
@@ -78,12 +78,6 @@ def drop_db():
         db.cursor().executescript(f.read())
     db.commit()
 
-@app.route('/')
-def show_entries():
-    db = get_db()
-    cur = db.execute('select a_name, a_active from Assignment')
-    entries = cur.fetchall()
-    return render_template('/', entries=entries)
 
 @app.route('/add', methods=['POST'])
 def add_entry():
