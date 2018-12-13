@@ -57,6 +57,11 @@ def close_db(error):
     if hasattr(g, 'flaskr.db'):
         g.sqlite_db.close()
 
+@app.cli.command('initdb')
+def initdb_command():
+    print("""Initializes the database.""")
+    init_db()
+    print('Initialized the database.')
 
 def init_db():
     db = get_db()
@@ -64,12 +69,17 @@ def init_db():
         db.cursor().executescript(f.read())
     db.commit()
 
+@app.cli.command('dropdb')
+def drop_db_command():
+    print("Dropping database.")
+    drop_db()
+    print("Dropped databse.")
 
-@app.cli.command('initdb')
-def initdb_command():
-    """Initializes the database."""
-    init_db()
-    print('Initialized the database.')
+def drop_db():
+    db = get_db()
+    with app.open_resource('drop.sql', mode='r') as f:
+        db.cursor().executescript(f.read())
+    db.commit()
 
 
 @app.route('/')
