@@ -25,9 +25,9 @@ def get_assignment_path(link):
 				assignment.problem_list.append(problem)
 
 	if link == 'active_assignments': 
-		return render_template('assignments.html', assignment_list=filter_assignments(1))
+		return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 1))
 	if link == 'past_assignments': 
-		return render_template('assignments.html', assignment_list=filter_assignments(0))
+		return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 0))
 	return "Something went wrong"
 
 @assignment_blueprint.route('/<link>/<problem>', methods=['GET'])
@@ -65,32 +65,12 @@ def get_problems(link, problem_id):
 #     # TODO: Return error that something went wrong
 #     return ""
 
-def filter_assignments(status):
+def filter_assignments(assignments, status):
 	filtered_assignment_list = []
-	for assignment in get_db_assignments():
+	for assignment in assignments:
 		if assignment.active == status:
 			filtered_assignment_list.append(assignment)
 	return filtered_assignment_list
-
-def get_problem_by_assignment_id(assignment_id):
-	problems = get_db_problems()
-	problem_list = []
-	for p in problems:
-		if p.assignment_id == assignment_id:
-			problem_list.append(p)
-	return problem_list
-
-def get_problem_info(problem_id):
-	assignment = get_assignment_by_problem_id(problem_id)
-	for problem in assignment.problem_list:
-		if problem.id == problem_id:
-			return problem
-
-def get_assignment_by_problem_id(problem_id):
-	for assignment in get_db_assignments():
-		for problem in assignment.problem_list:
-			if problem.id == problem_id:
-				return assignment
 
 def get_db_assignments():
 	assignment_list = []
