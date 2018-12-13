@@ -9,15 +9,7 @@ from flask import current_app as app
 class Assignment:
 	def __init__(self, name, description, active):
 		self.name = name
-		self.problem_list = []
 		self.active = active
-
-	def toJson(self):
-		return {"name": self.name, "problem_list": self.problem_list, "active": self.active}
-
-	def create_problem(self, name, desc):
-		self.problem_list.append(Problem(name, desc, "add", self.name))
-
 
 class Problem:
 	def __init__(self, name, desc, function, assignment_name):
@@ -26,9 +18,6 @@ class Problem:
 		self.assignment_name = assignment_name
 		self.function = function
 		self.id = str(uuid.uuid4())
-
-	def toJson(self):
-		return {"name": self.name, "description": self.desc, "id": self.id}
 
 class UploadedFile:
 	def __init__(self, file):
