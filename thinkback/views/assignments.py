@@ -122,7 +122,7 @@ def get_db():
     print("""Opens a new database connection if there is none yet for the
 	current application context.
 	""")
-    if not hasattr(g, 'flaskr.db'):
+    if not hasattr(g, 'thinkback.db'):
         g.sqlite_db = connect_db()
     return g.sqlite_db
 
