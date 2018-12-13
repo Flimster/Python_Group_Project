@@ -7,6 +7,19 @@
 </head>
 <body>
 	{% block content %}
+		<div class="tab">
+			{% for item in assignment_list %}
+				<button class="tablinks" onClick="openAssignment(event, '{{ item.name }}')">{{ item.name }}</button>
+			{% endfor %}
+		</div>
+		{% for assignment in assignment_list %}
+			<div id="{{assignment.name}}" class="tabcontent">
+				{% for problem in assignment.problem_list %}
+					<a href="{{ url_for('/assignments.get_problems', link=assignment.active, problem=problem.id) }}">{{problem.name}}</a>
+					<p>{{ problem.desc }}</p>
+				{% endfor %}
+			</div>
+		{% endfor %}
 		<h2>
 			{{problem.name, problem.desc}}
 		</h2>
