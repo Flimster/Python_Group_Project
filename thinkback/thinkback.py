@@ -13,17 +13,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.register_blueprint(about.about_blueprint)
 app.register_blueprint(assignments.assignment_blueprint)
 
-@app.route('/index')
-@app.route('/')
-def index():
-    return render_template('/index.html')
-
-
-if __name__ == '__main__':
-    app.config['SESSION_TYPE'] = 'filesystem'
-    app.run(debug=True)
-
-
 app.config.from_object(__name__)  # load config from this file , flaskr.py
 # Load default config and override config from an environment variable
 
@@ -82,3 +71,15 @@ def drop_db():
     with app.open_resource('drop.sql', mode='r') as f:
         db.cursor().executescript(f.read())
     db.commit()
+
+
+@app.route('/index')
+@app.route('/')
+def index():
+    return render_template('/index.html')
+
+
+
+if __name__ == '__main__':
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.run(debug=True)
