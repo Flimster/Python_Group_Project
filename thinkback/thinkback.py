@@ -67,7 +67,7 @@ def init_db():
 
 @app.cli.command('initdb')
 def initdb_command():
-    print("""Initializes the database.""")
+    """Initializes the database."""
     init_db()
     print('Initialized the database.')
 
