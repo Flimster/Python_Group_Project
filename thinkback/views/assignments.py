@@ -8,12 +8,7 @@ assignment_blueprint = Blueprint('/assignments', __name__)
 
 @assignment_blueprint.route('/<link>', methods=['GET'])
 def get_assignment_path(link):
-    assignment_list = database.get_db_assignments()
-    problem_list = database.get_db_problems()
-    for assignment in assignment_list:
-        for problem in problem_list:
-            if problem.assignment_id == assignment.id:
-                assignment.problem_list.append(problem)
+    assignment_list = database.get_assignments_with_problems()
 
     if link == 'active_assignments':
         return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 1))
