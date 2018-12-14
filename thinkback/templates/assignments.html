@@ -12,12 +12,12 @@
             {% endfor %}
         </div>
         {% for assignment in assignment_list %}
-            <div id="{{assignment.name}}" class="tabcontent">
-                {% for problem in assignment.problem_list %}
-                    <a href="{{ url_for('/assignments.get_problems', link=assignment.active, problem=problem.id) }}">{{problem.name}}</a>
+            {% for problem in assignment.problem_list %}
+                <div id="{{assignment.name}}" class="tabcontent">
+                    <a href="{{ url_for('/assignments.get_problems', link=assignment.active, problem_id=problem.id) }}">{{problem.name}}</a>
                     <p>{{ problem.desc }}</p>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         {% endfor %}
 	{% endblock %}
 </body>
