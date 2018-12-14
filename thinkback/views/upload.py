@@ -45,7 +45,6 @@ def upload_file(link, problem_id):
                 tmp = solution.Solution(problem_function)
                 results = tmp.run_tests()
                 problem = get_single_problem(problem_id)
-
                 return render_template('problem.html', link=link, problem=problem, results=results)
             except AttributeError:
                 # If the function did not exists remove the file
