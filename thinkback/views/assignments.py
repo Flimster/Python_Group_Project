@@ -6,6 +6,8 @@ from ..models import Assignment, Problem, UploadedFile
 from flask import current_app as app
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, flash, url_for, g
+from pprint import pprint
+import json
 
 ALLOWED_EXTENSIONS = set(['py'])
 
@@ -33,7 +35,7 @@ def get_assignment_path(link):
 @assignment_blueprint.route('/<link>/<problem_id>', methods=['GET'])
 def get_problems(link, problem_id):
 	problem = get_single_problem(problem_id)
-	return render_template('problem.html', link=link, problem=problem)
+	return render_template('problem.html', link=link, problem=problem, results={})
 
 
 @assignment_blueprint.route('/<link>/<problem_id>', methods=['POST'])
@@ -53,17 +55,33 @@ def upload_file(link, problem_id):
 
 			if not os.path.exists(path):
 				os.makedirs(path)
-			
+
 			submitted_file.save_file_to_path(path, filename)
 			module_path = '.uploads.{}'.format(problem_id)
-			problem_module = submitted_file.get_file_module(module_path, filename)
+
+			problem_module = submitted_file.get_file_module(
+				module_path, filename)
+
 			function_name = get_function_name(problem_id)
-			problem_function = getattr(problem_module, function_name)
-			print(problem_function(432))
+			# Try to import the fuction needed for the problem
+			try:
+				correct_module = submitted_file.get_testing_class(module_path)
+				problem_function = getattr(problem_module, function_name)
+				tmp = correct_module.HelloWorld(problem_function)
+				results = tmp.run_tests()
+				pprint(results)
+				problem = get_single_problem(problem_id)
+				results = json.dumps(results)
+				results = json.loads(results)
+				return render_template('problem.html', link=link, problem=problem, results=results)
+			except AttributeError:
+				# If the function did not exists remove the file
+				os.remove(os.path.join(path, filename))
 			return redirect(request.url)
 
 	# TODO: Return error that something went wrong
 	return ""
+
 
 def filter_assignments(assignments, status):
 	filtered_assignment_list = []
@@ -94,19 +112,24 @@ def get_db_problems():
 			problem['p_id'], problem['a_id'], problem['p_name'], problem['p_desc'], problem['p_solution_name']))
 	return problem_list
 
+
 def get_single_problem(problem_id):
 	db = get_db()
-	cur = db.execute('select * from problems P where P.p_id = {}'.format(problem_id))
+	cur = db.execute(
+		'select * from problems P where P.p_id = {}'.format(problem_id))
 	entry = cur.fetchone()
-	problem = Problem(entry['p_id'], entry['a_id'], entry['p_name'], entry['p_desc'], entry['p_solution_name'])
+	problem = Problem(entry['p_id'], entry['a_id'], entry['p_name'],
+					  entry['p_desc'], entry['p_solution_name'])
 	return problem
 
 
 def get_function_name(problem_id):
 	db = get_db()
-	cur = db.execute('select P.p_solution_name from Problems P where P.p_id = {}'.format(problem_id))
+	cur = db.execute(
+		'select P.p_solution_name from Problems P where P.p_id = {}'.format(problem_id))
 	entry = cur.fetchone()
 	return entry['p_solution_name']
+
 
 def connect_db():
 	print("""Connects to the specific database.""")
