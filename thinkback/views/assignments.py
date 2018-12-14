@@ -44,35 +44,27 @@ def upload_file(link, problem_id):
 		# Check if the post request has a file in it
 		file = request.files['file']
 		submitted_file = UploadedFile(file)
-
 		if submitted_file.is_empty():
 			flash("Something went wrong")
 			return redirect(request.url)
-
 		if submitted_file.file and submitted_file.is_allowed():
 			filename = secure_filename(file.filename)
 			path = submitted_file.create_file_path(problem_id)
-
 			if not os.path.exists(path):
 				os.makedirs(path)
-
 			submitted_file.save_file_to_path(path, filename)
 			module_path = '.uploads.{}'.format(problem_id)
-
+			solution_path = '.impl.{}'.format(problem_id)
 			problem_module = submitted_file.get_file_module(
 				module_path, filename)
-
 			function_name = get_function_name(problem_id)
 			# Try to import the fuction needed for the problem
 			try:
-				correct_module = submitted_file.get_testing_class(module_path)
 				problem_function = getattr(problem_module, function_name)
-				tmp = correct_module.HelloWorld(problem_function)
+				solution = importlib.import_module('.correct', package=solution_path) 
+				tmp = solution.Solution(problem_function)
 				results = tmp.run_tests()
-				pprint(results)
 				problem = get_single_problem(problem_id)
-				results = json.dumps(results)
-				results = json.loads(results)
 				return render_template('problem.html', link=link, problem=problem, results=results)
 			except AttributeError:
 				# If the function did not exists remove the file

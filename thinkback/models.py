@@ -47,7 +47,3 @@ class UploadedFile:
 		filename = filename.split('.')
 		module = importlib.import_module('.{}'.format(filename[0]), package=module_path)
 		return module
-	
-	def get_testing_class(self, module_path):
-		module = importlib.import_module('.correct', package=module_path)
-		return module
