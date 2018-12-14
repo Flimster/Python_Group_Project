@@ -6,6 +6,7 @@ import importlib
 from flask import current_app as app
 from werkzeug.utils import secure_filename
 from ..models import Assignment, Problem, ProblemModule
+from ..database.database import get_db
 from flask import Blueprint, render_template, request, redirect, flash, url_for, g
 
 ALLOWED_EXTENSIONS = set(['py'])
@@ -74,17 +75,17 @@ def get_single_problem(problem_id):
 					  entry['p_desc'], entry['p_solution_name'])
 	return problem
 
-def connect_db():
-	print("""Connects to the specific database.""")
-	rv = sqlite3.connect(app.config['DATABASE'])
-	rv.row_factory = sqlite3.Row
-	return rv
+# def connect_db():
+# 	print("""Connects to the specific database.""")
+# 	rv = sqlite3.connect(app.config['DATABASE'])
+# 	rv.row_factory = sqlite3.Row
+# 	return rv
 
 
-def get_db():
-	print("""Opens a new database connection if there is none yet for the
-	current application context.
-	""")
-	if not hasattr(g, 'thinkback.db'):
-		g.sqlite_db = connect_db()
-	return g.sqlite_db
+# def get_db():
+# 	print("""Opens a new database connection if there is none yet for the
+# 	current application context.
+# 	""")
+# 	if not hasattr(g, 'thinkback.db'):
+# 		g.sqlite_db = connect_db()
+# 	return g.sqlite_db
