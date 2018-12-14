@@ -1,2 +1,2 @@
 drop table if exists problems;
-drop table if exists assigments;
+drop table if exists assignments;
