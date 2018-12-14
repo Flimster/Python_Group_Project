@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, session, g, redirect, url_for, abort, \
-    render_template, flash
 import os
-from .views import about, assignments, upload
 import sqlite3
 from .database import database
+from .views import about, assignments, upload
+from flask import Flask, render_template, g
 
 UPLOAD_FOLDER = './uploads'
 SOLUTIONS_FOLDER = './impl'
@@ -28,8 +27,7 @@ app.config.update(dict(
 ))
 app.config.from_envvar('THINKBACK_SETTINGS', silent=True)
 
-# Database command line tools
-
+# Database command line tool
 
 @app.cli.command('dropdb')
 def drop_db_command():

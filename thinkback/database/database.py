@@ -1,8 +1,9 @@
 # thinkback/database.py
 
+import sqlite3
 from flask import g
 from flask import current_app as app
-import sqlite3
+from ..models import Problem, Assignment
 
 
 def drop_db():
@@ -34,3 +35,34 @@ def connect_db():
     rv.row_factory = sqlite3.Row
     return rv
 
+
+def get_db_assignments():
+	assignment_list = []
+	db = get_db()
+	cur = db.execute('select * from assignments')
+	entries = cur.fetchall()
+	for assignment in entries:
+		assignment_list.append(Assignment(
+			assignment['a_id'], assignment['a_name'], assignment['a_active']))
+	return assignment_list
+
+
+def get_db_problems():
+	problem_list = []
+	db = get_db()
+	cur = db.execute('select * from problems')
+	entries = cur.fetchall()
+	for problem in entries:
+		problem_list.append(Problem(
+			problem['p_id'], problem['a_id'], problem['p_name'], problem['p_desc'], problem['p_solution_name']))
+	return problem_list
+
+
+def get_single_problem(problem_id):
+	db = get_db()
+	cur = db.execute(
+		'select * from problems P where P.p_id = {}'.format(problem_id))
+	entry = cur.fetchone()
+	problem = Problem(entry['p_id'], entry['a_id'], entry['p_name'],
+					  entry['p_desc'], entry['p_solution_name'])
+	return problem
