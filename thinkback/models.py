@@ -47,15 +47,7 @@ class UploadedFile:
 		filename = filename.split('.')
 		module = importlib.import_module('.{}'.format(filename[0]), package=module_path)
 		return module
-
-
-# TODO: Have dynamic test cases
-class ProblemTestCases(unittest.TestCase):
-	def __init__(self, correct_func):
-		super().__init__()
-		self.parameter_list = [1, 2, 3]
-		self.correct_func = correct_func
 	
-	def run_tests(self, user_func):
-		for parameter in self.parameter_list:
-			self.assertEqual(user_func(parameter), self.correct_func(parameter))
+	def get_testing_class(self, module_path):
+		module = importlib.import_module('.correct', package=module_path)
+		return module
