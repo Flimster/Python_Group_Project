@@ -14,7 +14,7 @@
 				</h2>
 				<p> {{problem.desc}}</p>
 			</div>
-			<form action="{{ url_for('/assignments.upload_file', link=link, problem_id=problem['id'] ) }}" method="POST" enctype="multipart/form-data">
+			<form action="{{ url_for('upload.upload_file', link=link, problem_id=problem['id'] ) }}" method="POST" enctype="multipart/form-data">
 				<input type="file" name="file">
 				<input type="submit" value="Submit file">
 			</form>
