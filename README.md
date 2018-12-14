@@ -6,7 +6,7 @@ Thinkback is a website that allows the user to submit his assignment through the
 
 To get the website running on your local machine you must do the following steps. </br>
 
-You need to have the following installed:
+You need to have the following installed: </br>
 [SQLite](https://sqlite.org/index.html) </br>
 [python3](https://www.python.org/) </br>
 [pip](https://pip.pypa.io/en/stable/installing/) </br>
@@ -14,12 +14,12 @@ You need to have the following installed:
 
 ### Installing
 
-Once you have those programs up and running, unzip the downloaded folder to the desired location. The next step is to set up a local server with flask. You need to run the following commands in a terminal :</br>
+Once you have those programs up and running, unzip the downloaded folder to the desired location. The next step is to set up a local server with flask. You need to run the following commands in a terminal at the folder's directory:</br>
 
 `export FLASK_APP=thinkback.py`</br>
 `flask run`</br>
 
-This will launch the server and be able to run on your computer.
+This will launch the server and host the website on your computer.
 
 ### Deploying 
 
