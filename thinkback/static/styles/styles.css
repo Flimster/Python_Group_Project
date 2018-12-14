@@ -75,7 +75,7 @@ body {
    width:100%;
    height:40px;   /* Height of the footer */
    background-color: #06425C;
-  font-family: Arial, Helvetica, sans-serif;
+   font-family: Arial, Helvetica, sans-serif;
 }
 
 .footer a {
@@ -91,11 +91,11 @@ body {
 
 /* Style the tab */
 .tab {
+  border-radius: 10px;
   float: left;
-  border: 1px solid rgb(70, 69, 69);
+  border: 1px solid  #06425C;;
   background-color: rgb(211, 211, 211);
-  width: 20%;
-  height: 300px;
+  width: 17%;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -107,7 +107,7 @@ body {
   width: 100%;
   border: none;
   outline: none;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
   transition: 0.3s;
   font-size: 16px;
@@ -128,13 +128,25 @@ body {
 .tabcontent {
   display: none;
   float: left;
-  padding: 0px 12px;
+  border-radius: 10px;
+  /* padding: 0px 12px; */
   border: 1px solid #ccc;
-  width: 70%;
-  border-left: none;
-  height: 300px;
+  width: 50%;
+  /* border-left: none; */
 }
 
 .fileupload {
   margin: 20px;
+}
+
+.problem {
+  margin-left: 100px;
+}
+
+.assignment_problem {
+  padding: 10px;
+}
+
+.tablinks {
+  border-radius: 10px
 }
