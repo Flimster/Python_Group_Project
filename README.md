@@ -1,4 +1,4 @@
-# Thinkback
+# ThinkBack
 
 Thinkback is a website that allows the user to submit his assignment through the website's file upload system. The websites categorizes assignments into two, active assignments and past assignments. The ThinkBack system will then notify if the user's submission passed or failed, giving the results of the tests made.
 
@@ -6,10 +6,10 @@ Thinkback is a website that allows the user to submit his assignment through the
 
 To get the website running on your local machine you must do the following steps. </br>
 
-You need to have SQLite installed (https://sqlite.org/index.html)</br>
-You need to have python3 installed (https://www.python.org/)</br>
-You need to have pip installed (https://pip.pypa.io/en/stable/installing/)</br>
-And you need to have flask installed (http://flask.pocoo.org/)</br>
+You need to have [SQLite](https://sqlite.org/index.html) installed </br>
+You need to have [python3](https://www.python.org/) installed </br>
+You need to have [pip](https://pip.pypa.io/en/stable/installing/) installed </br>
+And you need to have [flask](http://flask.pocoo.org/) installed</br>
 
 ### Installing
 
