@@ -6,10 +6,11 @@ Thinkback is a website that allows the user to submit his assignment through the
 
 To get the website running on your local machine you must do the following steps. </br>
 
-You need to have [SQLite](https://sqlite.org/index.html) installed </br>
-You need to have [python3](https://www.python.org/) installed </br>
-You need to have [pip](https://pip.pypa.io/en/stable/installing/) installed </br>
-And you need to have [flask](http://flask.pocoo.org/) installed</br>
+You need to have the following installed:
+[SQLite](https://sqlite.org/index.html) </br>
+[python3](https://www.python.org/) </br>
+[pip](https://pip.pypa.io/en/stable/installing/) </br>
+[flask](http://flask.pocoo.org/)</br>
 
 ### Installing
 
