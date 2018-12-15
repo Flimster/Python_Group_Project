@@ -29,11 +29,13 @@ def upload(assignment_id):
 		flash('The filename has to be correct.py')
 		return redirect(request.url)
 
-	path = os.path.join('./impl', '7')
+	path = os.path.join('./impl', '11')
 
 	if not os.path.exists(path):
 		os.makedirs(path)
 		file.save(os.path.join(path, filename))
 		file.save(os.path.join(path, '__init__.py'))
+	
+	database.insert_problem(assignment_id, name, desc, func_name)
 
 	return redirect(url_for('/assignments.get_assignment_path', link='active_assignments'))
