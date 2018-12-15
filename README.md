@@ -12,7 +12,7 @@ You need to have the following installed: </br>
 [pip](https://pip.pypa.io/en/stable/installing/) </br>
 [flask](http://flask.pocoo.org/)</br>
 
-### Installing
+## Installing
 
 Once you have those programs up and running, unzip the downloaded folder to the desired location. The next step is to set up a local server with flask. To do that you need to run the following commands in a terminal at the folder's directory:</br>
 
