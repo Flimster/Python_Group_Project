@@ -10,6 +10,16 @@
     <script src="main.js"></script>
 </head>
 <body>
-    
+    {% block content %}
+    <form action="/action_page.php">
+        Problem Name:<br>
+        <input type="text" name="problem_name" value="Problem Name"><br>
+        Problem Description:<br>
+        <input type="text" name="problem_desc" value="Problem Description"><br><br>
+        Function Name:<br>
+        <input type="text" name="function_name" value="Function Name"><br><br>
+        <input type="submit" value="Submit">
+    </form> 
+    {% endblock %}
 </body>
 </html>

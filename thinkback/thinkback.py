@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from .database import database
-from .views import about, assignments, upload
+from .views import about, assignments, upload, createassignment
 from flask import Flask, render_template, g
 
 UPLOAD_FOLDER = './uploads'
