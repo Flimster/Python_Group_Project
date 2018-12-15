@@ -19,7 +19,17 @@ Once you have those programs up and running, unzip the downloaded folder to the 
 `export FLASK_APP=thinkback.py`</br>
 `flask run`</br>
 
-This will launch the server and host the website on your computer.
+This will launch the server and host the website on your computer.</br>
+
+We also have a database with some example data to work with. To initialize the database run the following command in the terminal: </br>
+
+`flask initdb` </br>
+
+You should receive this message in the terminal: </br>
+
+`Initializes the database.` </br>
+`Initialized the database.` </br>
+`Closes the database again at the end of the request` </br>
 
 ### Deployment
 
