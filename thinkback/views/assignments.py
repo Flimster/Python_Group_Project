@@ -2,7 +2,7 @@
 from ..database import database
 from flask import current_app as app
 from flask import Blueprint, render_template
-from ..models import Assignment, Problem, ProblemModule
+from ..models import Assignment, Problem
 
 assignment_blueprint = Blueprint('/assignments', __name__)
 

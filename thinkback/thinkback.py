@@ -29,6 +29,7 @@ app.config.from_envvar('THINKBACK_SETTINGS', silent=True)
 
 # Database command line tool
 
+
 @app.cli.command('dropdb')
 def drop_db_command():
     print("Dropping database.")
@@ -49,9 +50,11 @@ def close_db(error):
     if hasattr(g, 'thinkback.db'):
         g.sqlite_db.close()
 
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template('404.html')
+
 
 @app.route('/index')
 @app.route('/')
