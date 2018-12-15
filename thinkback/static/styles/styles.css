@@ -154,3 +154,8 @@ body {
 .about_us {
   padding: 25px;
 }
+
+.tab_header {
+  text-align: center;
+  color: #06425C
+}
