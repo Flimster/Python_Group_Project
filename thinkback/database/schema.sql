@@ -23,7 +23,7 @@ create table problems
 	p_solution_name text
 );
 
-insert into assignments(a_name, a_active) values ('Basics in Pyton', 1);
+insert into assignments(a_name, a_active) values ('Basics in Python', 1);
 insert into assignments(a_name, a_active) values ('Advanced Python pt. 1', 1);
 insert into assignments(a_name, a_active) values ('Advanced Python pt. 2', 0);
 
