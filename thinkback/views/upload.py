@@ -47,14 +47,20 @@ def upload_file(link, problem_id):
 			# Try to import the fuction needed for the problem
 			try:
 				problem_function = getattr(problem_module, function_name)
-				solution = importlib.import_module(
+				solution_module = importlib.import_module(
 					'.correct', package=solution_path)
-				tmp = solution.Solution(problem_function)
-				results = tmp.run_tests()
+				solution = solution_module.Solution(problem_function)
+				results = solution.run_tests()
+				for value in results.values():
+					if value == "Correct":
+						flash(value, 'success')
+					else:
+						flash(value, 'warning')
 				problem = database.get_single_problem(problem_id)
-			except AttributeError:
+
+			except AttributeError as e:
 				# If the function did not exists remove the file
-				flash("Could not import the correct file name")
+				flash(e, 'danger')
 				os.remove(os.path.join(path, filename))
 
-	return render_template('problem.html', link=link, problem=problem, results=results)
+	return render_template('problem.html', link=link, problem=problem)
