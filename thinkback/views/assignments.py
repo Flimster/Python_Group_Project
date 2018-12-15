@@ -14,6 +14,8 @@ def get_assignment_path(link):
         return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 1), flag=True)
     elif link == 'past_assignments':
         return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 0), flag=False)
+    elif link.isdigit():
+        return render_template('createassignment.html', assignment_id=link)
     return render_template("404.html")
 
 @assignment_blueprint.route('/<link>/<problem_id>', methods=['GET'])
