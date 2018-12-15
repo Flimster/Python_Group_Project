@@ -24,6 +24,7 @@
             <div class="dropdown-content_t" id="myDropdown">
                 <a href="{{ url_for('/assignments.get_assignment_path', link='active_assignments') }}">Active Assignments</a>
                 <a href="{{ url_for('/assignments.get_assignment_path', link='past_assignments') }}">Past Assignments</a>
+                <a href="{{ url_for('createassignment.create_assignment') }}">Create new Assignment</a>
             </div>
         </div>
         <a href="{{ url_for('about.about_us')}}">About Us</a> 
