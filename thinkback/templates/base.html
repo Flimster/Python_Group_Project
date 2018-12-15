@@ -24,10 +24,10 @@
             <div class="dropdown-content_t" id="myDropdown">
                 <a href="{{ url_for('/assignments.get_assignment_path', link='active_assignments') }}">Active Assignments</a>
                 <a href="{{ url_for('/assignments.get_assignment_path', link='past_assignments') }}">Past Assignments</a>
-                <a href="#">Placeholder</a>
+                <a href="aboutus.html">Placeholder</a>
             </div>
         </div>
-        <a href="/about">About Us</a> 
+        <a href="{{ url_for('about.about_us')}}">About Us</a> 
     </div>
     <div class="banner" style="padding:15px; text-align:center;">
         <div class="banner-content">
