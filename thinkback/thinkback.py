@@ -1,5 +1,4 @@
 import os
-import sqlite3
 from .database import database
 from .views import about, assignments, upload
 from flask import Flask, render_template, g
@@ -8,16 +7,17 @@ UPLOAD_FOLDER = './uploads'
 SOLUTIONS_FOLDER = './impl'
 
 app = Flask(__name__)
+
 app.secret_key = b'ea983fa73ad64b649c11c15b437787a9'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SOLUTIONS_FOLDER'] = SOLUTIONS_FOLDER
 
+# Registers the blueprints
 app.register_blueprint(about.about_blueprint)
 app.register_blueprint(assignments.assignment_blueprint)
 app.register_blueprint(upload.upload_blueprint)
 
-app.config.from_object(__name__)  # load config from this file , thinkback.py
-# Load default config and override config from an environment variable
+app.config.from_object(__name__)
 
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'thinkback.db'),
@@ -26,8 +26,6 @@ app.config.update(dict(
     PASSWORD='default'
 ))
 app.config.from_envvar('THINKBACK_SETTINGS', silent=True)
-
-# Database command line tool
 
 
 @app.cli.command('dropdb')
