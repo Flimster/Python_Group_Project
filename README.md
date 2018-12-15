@@ -31,6 +31,16 @@ You should receive this message in the terminal: </br>
 `Initialized the database.` </br>
 `Closes the database again at the end of the request` </br>
 
+To clear all data from the database run the following command: </br>
+
+`flask dropdb` </br>
+
+You should receive this message in the terminal: </br>
+
+`Dropping database.` </br>
+`Dropped database.` </br>
+`Closes the database again at the end of the request` </br>
+
 ### Deployment
 
 It is not recommended to deploy the system on a live server since this program is in it's early alpha stage, and has not gone trough extensive security testing.
