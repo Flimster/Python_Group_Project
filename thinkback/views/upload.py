@@ -58,7 +58,7 @@ def upload_file(link, problem_id):
 						flash(value, 'warning')
 				problem = database.get_single_problem(problem_id)
 
-			except AttributeError as e:
+			except AttributeError or TypeError as e:
 				# If the function did not exists remove the file
 				flash(e, 'danger')
 				os.remove(os.path.join(path, filename))

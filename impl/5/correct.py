@@ -4,7 +4,7 @@ class Solution(unittest.TestCase):
 	def __init__(self, func):
 		super().__init__()
 		self.func = func
-		self.values = [1, 2, 3, 10, 100, 200]
+		self.values = [1, 2, 3, 10, 12, 15]
 	
 	def run_tests(self):
 		results = {}
