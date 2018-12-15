@@ -4,7 +4,7 @@ class Solution(unittest.TestCase):
 	def __init__(self, func):
 		super().__init__()
 		self.func = func
-		self.values = [1, 2, "fdafd", 3.0, True]
+		self.values = [1, 2, 3, 10, 100, 200]
 	
 	def run_tests(self):
 		results = {}
@@ -15,8 +15,11 @@ class Solution(unittest.TestCase):
 				self.assertEquals(expected, actual)
 				results[index] = "Correct"
 			except AssertionError:
-				results[index] = "Expected \"{}\" but got \"{}\" of type {}".format(expected, actual, str(type(actual)))
+				results[index] = "Expected \"{}\" but got \"{}\"".format(expected, actual)
 		return results
 
 	def _correct(self, a):
-		return str(a)
+		string_built = '|'
+		for i in range(a):
+			string_built += str(i) + '|'
+		return string_built
