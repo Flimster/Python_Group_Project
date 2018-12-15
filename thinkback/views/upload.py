@@ -32,10 +32,11 @@ def upload_file(link, problem_id):
 		elif file and submitted_file.is_allowed():
 			filename = secure_filename(file.filename)
 			path = submitted_file.create_file_path(problem_id)
-
+			path = os.path.abspath(path)
 			if not os.path.exists(path):
 				os.makedirs(path)
-
+			print(os.getcwd())
+			print(path)
 			submitted_file.save_files_to_path(path, filename)
 
 			module_path = '.uploads.{}'.format(problem_id)

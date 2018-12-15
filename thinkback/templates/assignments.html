@@ -7,8 +7,8 @@
 <body>
     {% block content %}
         <div class="tab">
-            {% if flag %} <h2 class="tab_header">Active Assignments</h2>
-            {% else %} <h2 class="tab_header">Past Assignments</h2>
+            {% if flag %} <h3 class="tab_header">Active Assignments</h3>
+            {% else %} <h3 class="tab_header">Past Assignments</h3>
             {% endif %}
             {% for item in assignment_list %}
                 <button class="tablinks" onClick="openAssignment(event, '{{ item.name }}')">{{ item.name }}</button>
