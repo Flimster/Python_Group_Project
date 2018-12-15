@@ -12,13 +12,13 @@
 </head>
 <body>
 
-<div class="navbar">
+<div class="navbar_t">
   <a href="{{ url_for('index') }}">Home</a>
-    <div class="dropdown">
-        <button class="dropbtn" onclick="myFunction()">Assignments
+    <div class="dropdown_t">
+        <button class="dropbtn_t" onclick="myFunction()">Assignments
             <i class="fa fa-caret-down"></i>
         </button>
-            <div class="dropdown-content" id="myDropdown">
+            <div class="dropdown-content_t" id="myDropdown">
                 <a href="{{ url_for('/assignments.get_assignment_path', link='active_assignments') }}">Active Assignments</a>
                 <a href="{{ url_for('/assignments.get_assignment_path', link='past_assignments') }}">Past Assignments</a>
                 <a href="#">Placeholder</a>
