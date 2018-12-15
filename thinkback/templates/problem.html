@@ -1,27 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
-	{% extends "base.html" %}
+{% extends "base.html" %}
+
 <head>
-	
+	{% block head %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{% endblock %}
 </head>
+
 <body>
 	{% block content %}
-		<div class="problem">
-			<div>
-				<h2>
-					{{problem.name}}
-				</h2>
-				<p> {{problem.desc}}</p>
-			</div>
-			<form action="{{ url_for('/assignments.upload_file', link=link, problem_id=problem['id'] ) }}" method="POST" enctype="multipart/form-data">
-				<input type="file" name="file">
-				<input type="submit" value="Submit file">
-			</form>
-			{% for value in results.values() %}
-				<p>{{value}}</p>
-			{% endfor %}
+	<div class="problem">
+		<div>
+			<h2>
+				{{problem.name}}
+			</h2>
+			<p> {{problem.desc}}</p>
 		</div>
+		<form action="{{ url_for('upload.upload_file', link=link, problem_id=problem['id'] ) }}" method="POST" enctype="multipart/form-data">
+			<input type="file" name="file">
+			<input type="submit" value="Submit file">
+		</form>
+		<ul>
+			{% for value in results.values() %}
+			<li>{{value}}</li>
+			{% endfor %}
+		</ul>
+
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for message in messages %}
+					<p>{{message}}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+	</div>
 	{% endblock %}
 </body>
 

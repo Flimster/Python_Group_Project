@@ -76,3 +76,10 @@ def get_single_problem(problem_id):
 	problem = Problem(entry['p_id'], entry['a_id'], entry['p_name'],
 					  entry['p_desc'], entry['p_solution_name'])
 	return problem
+
+def get_function_name(problem_id):
+	db = get_db()
+	cur = db.execute(
+		'select P.p_solution_name from Problems P where P.p_id = {}'.format(problem_id))
+	entry = cur.fetchone()
+	return entry['p_solution_name']
