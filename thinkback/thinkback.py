@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from .database import database
-from .views import about, assignments, upload
+from .views import about, assignments, upload, problem_upload
 from flask import Flask, render_template, g
 
 UPLOAD_FOLDER = './uploads'
@@ -15,6 +15,7 @@ app.config['SOLUTIONS_FOLDER'] = SOLUTIONS_FOLDER
 app.register_blueprint(about.about_blueprint)
 app.register_blueprint(assignments.assignment_blueprint)
 app.register_blueprint(upload.upload_blueprint)
+app.register_blueprint(problem_upload.problem_upload_blueprint)
 
 app.config.from_object(__name__)  # load config from this file , thinkback.py
 # Load default config and override config from an environment variable
