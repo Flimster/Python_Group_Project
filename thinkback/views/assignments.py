@@ -12,10 +12,9 @@ def get_assignment_path(link):
 
     if link == 'active_assignments':
         return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 1))
-    if link == 'past_assignments':
+    elif link == 'past_assignments':
         return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 0))
-    return "Something went wrong"
-
+    return render_template("404.html")
 
 @assignment_blueprint.route('/<link>/<problem_id>', methods=['GET'])
 def get_problems(link, problem_id):

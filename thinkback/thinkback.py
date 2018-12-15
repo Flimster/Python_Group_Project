@@ -49,6 +49,10 @@ def close_db(error):
     if hasattr(g, 'thinkback.db'):
         g.sqlite_db.close()
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html')
+
 @app.route('/index')
 @app.route('/')
 def index():
