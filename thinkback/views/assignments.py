@@ -19,7 +19,7 @@ def get_assignment_path(link):
 @assignment_blueprint.route('/<link>/<problem_id>', methods=['GET'])
 def get_problems(link, problem_id):
     problem = database.get_single_problem(problem_id)
-    return render_template('problem.html', link=link, problem=problem, results={})
+    return render_template('problem.html', link=link, problem=problem)
 
 
 def filter_assignments(assignments, status):
