@@ -57,7 +57,7 @@ def not_found(e):
 @app.route('/')
 def index():
     assignment_list = database.get_assignments_with_problems()
-    return render_template('assignments.html', assignment_list=assignments.filter_assignments(assignment_list, 1))
+    return render_template('assignments.html', assignment_list=assignments.filter_assignments(assignment_list, 1), flag=True)
 
 
 if __name__ == '__main__':
