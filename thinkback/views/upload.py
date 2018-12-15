@@ -4,6 +4,7 @@ import sqlite3
 import importlib
 from flask import current_app as app
 from ..models import Problem, ProblemModule
+from ..database import database
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, flash, redirect, g
 
@@ -36,7 +37,7 @@ def upload_file(link, problem_id):
 
             problem_module = submitted_file.get_file_module(
                 module_path, filename)
-            function_name = get_function_name(problem_id)
+            function_name = database.get_function_name(problem_id)
             # Try to import the fuction needed for the problem
             try:
                 problem_function = getattr(problem_module, function_name)
@@ -44,7 +45,7 @@ def upload_file(link, problem_id):
                     '.correct', package=solution_path)
                 tmp = solution.Solution(problem_function)
                 results = tmp.run_tests()
-                problem = get_single_problem(problem_id)
+                problem = database.get_single_problem(problem_id)
                 return render_template('problem.html', link=link, problem=problem, results=results)
             except AttributeError:
                 # If the function did not exists remove the file
@@ -53,36 +54,3 @@ def upload_file(link, problem_id):
 
     # TODO: Return error that something went wrong
     return ""
-
-def get_single_problem(problem_id):
-	db = get_db()
-	cur = db.execute(
-		'select * from problems P where P.p_id = {}'.format(problem_id))
-	entry = cur.fetchone()
-	problem = Problem(entry['p_id'], entry['a_id'], entry['p_name'],
-					  entry['p_desc'], entry['p_solution_name'])
-	return problem
-
-
-def get_function_name(problem_id):
-	db = get_db()
-	cur = db.execute(
-		'select P.p_solution_name from Problems P where P.p_id = {}'.format(problem_id))
-	entry = cur.fetchone()
-	return entry['p_solution_name']
-
-
-def connect_db():
-	print("""Connects to the specific database.""")
-	rv = sqlite3.connect(app.config['DATABASE'])
-	rv.row_factory = sqlite3.Row
-	return rv
-
-
-def get_db():
-	print("""Opens a new database connection if there is none yet for the
-	current application context.
-	""")
-	if not hasattr(g, 'thinkback.db'):
-		g.sqlite_db = connect_db()
-	return g.sqlite_db
