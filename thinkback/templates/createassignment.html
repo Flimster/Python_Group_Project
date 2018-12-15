@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html>
-    {% extends "base.html" %}
+{% extends "base.html" %}
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+
 </head>
+
 <body>
     {% block content %}
-    <form action="/action_page.php">
+    <form class="form-inline" action="{{ url_for('problem_upload.upload', assignment_id=assignment_id ) }}" method="POST"
+        enctype="multipart/form-data">
         Problem Name:<br>
-        <input type="text" name="problem_name" value="Problem Name"><br>
+        <input type="text" name="problem_name"><br>
         Problem Description:<br>
-        <input type="text" name="problem_desc" value="Problem Description"><br><br>
+        <input type="text" name="problem_desc"><br><br>
         Function Name:<br>
-        <input type="text" name="function_name" value="Function Name"><br><br>
-        <form class="form-inline" action="{{ url_for('upload.upload_file', link=link, problem_id=problem['id'] ) }}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="function_name"><br><br>
+
+        <input type="file" name="file"><br><br>
+
         <input type="submit" value="Submit">
-    </form> 
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
     {% endblock %}
 </body>
+
 </html>

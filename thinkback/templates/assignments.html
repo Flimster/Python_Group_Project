@@ -22,7 +22,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <a href="{{ url_for('problem_upload.post_new_problem', assignment_id = assignment.id)}}">HERE</a>
+            <a href="{{ url_for('/assignments.create_assignment', assignment_id = assignment.id)}}">HERE</a>
             {% endfor %}
         {% endblock %}
 </body>
