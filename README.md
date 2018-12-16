@@ -1,7 +1,7 @@
 # ThinkBack
 
 ThinkBack is a website that allows the user to submit his assignment through the website's file upload system. The websites categorizes assignments into two, active assignments and past assignments. The ThinkBack system will then notify if the user's submission passed or failed, giving the results of the tests made.</br>
-We prioritized on having a functional bug-free program as apposed to a semi-functioning feature rich problem. Each feature that we added was done with a lot of testing
+We prioritized on having a functional bug-free program as opposed to a semi-functioning feature rich problem. Each feature that we added was done with a lot of testing
 and refactoring.
 
 ### Getting started
