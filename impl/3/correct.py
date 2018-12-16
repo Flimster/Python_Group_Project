@@ -15,7 +15,7 @@ class Solution(unittest.TestCase):
 				self.assertEquals(expected, actual)
 				results[index] = "Correct"
 			except AssertionError:
-				results[index] = "Expected \"{}\" but got \"{}\" of type {}".format(expected, actual, str(type(actual)))
+				results[index] = "Input: \"{}\" but got \"{}\" of type {}".format(expected, actual, str(type(actual)))
 		return results
 
 	def _correct(self, a):
