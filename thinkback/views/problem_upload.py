@@ -9,6 +9,8 @@ problem_upload_blueprint = Blueprint('problem_upload', __name__)
 
 @problem_upload_blueprint.route('/<assignment_id>', methods=['POST'])
 def upload(assignment_id):
+	"""Upload a solution for a problem for a given assignment"""
+	
 	name = request.form['problem_name']
 	desc = request.form['problem_desc']
 	func_name = request.form['function_name']
