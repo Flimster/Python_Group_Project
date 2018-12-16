@@ -18,7 +18,7 @@ You need to have the following installed: </br>
 
 Once you have those installed, unzip the downloaded folder to the desired location. The next step is to set up a local server with flask. To do that you need to run the following commands in a terminal at the folder's directory:</br>
 
-`pip3 install -r requirement.txt`</br>
+`pip install -r requirements.txt`</br>
 `export FLASK_APP=thinkback/thinkback.py`</br>
 `flask run`</br>
 
