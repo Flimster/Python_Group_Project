@@ -16,7 +16,7 @@ def get_assignment_path(link):
     elif link == 'past_assignments':
         return render_template('assignments.html', assignment_list=filter_assignments(assignment_list, 0), flag=False)
     elif link.isdigit() and int(link) <= len(assignment_list):
-        return render_template('createassignment.html', assignment_id=link)
+        return render_template('createproblem.html', assignment_id=link)
     return render_template("404.html")
 
 @assignment_blueprint.route('/<link>/<problem_id>', methods=['GET'])
@@ -28,7 +28,7 @@ def get_problems(link, problem_id):
 @assignment_blueprint.route('/<assignment_id>', methods=['GET'])
 def create_assignment(assignment_id):
     """Directs the user to a createassignment page"""
-    return render_template('createassignment.html', assignment_id=assignment_id)
+    return render_template('createproblem.html', assignment_id=assignment_id)
 
 
 def filter_assignments(assignments, status):
