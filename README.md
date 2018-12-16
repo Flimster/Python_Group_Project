@@ -48,6 +48,10 @@ You should receive this message in the terminal: </br>
 `Dropped database.` </br>
 `Closes the database again at the end of the request` </br>
 
+If, for some reason, you don't feel like making the solutions yourself for the example Assignments and their problems in the database with the example data
+we have mode them for you. They can be found in the 'solutions' folder and if you want to test to see how the system reacts to wrong answers or function names,
+just break the code.
+
 ### Deployment
 
 It is not recommended to deploy the system on a live server since this program is in it's early alpha stage, and has not gone trough extensive security testing.
