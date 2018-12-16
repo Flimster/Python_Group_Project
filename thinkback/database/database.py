@@ -5,28 +5,7 @@ from flask import g
 from flask import current_app as app
 from ..models import Problem, Assignment
 
-def drop_db():
-	"""Drops all database tables and erases all data"""
-	db = get_db()
-	with app.open_resource('./database/drop.sql', mode='r') as f:
-		db.cursor().executescript(f.read())
-	db.commit()
 
-def init_db():
-	"""Creates the tables for the database and inserts some example data into it"""
-	db = get_db()
-	with app.open_resource('./database/schema.sql', mode='r') as f:
-		db.cursor().executescript(f.read())
-	db.commit()
-
-
-def get_db():
-	"""Opens a new database connection if there is none yet for the
-		current application context.
-		"""
-	if not hasattr(g, 'thinkback.db'):
-		g.sqlite_db = connect_db()
-	return g.sqlite_db
 
 
 def connect_db():
@@ -101,3 +80,25 @@ def get_max_problem_id():
 	entry = cur.fetchone()
 	return entry['MAX(p_id)']
 	
+def drop_db():
+	"""Drops all database tables and erases all data"""
+	db = get_db()
+	with app.open_resource('./database/drop.sql', mode='r') as f:
+		db.cursor().executescript(f.read())
+	db.commit()
+
+def init_db():
+	"""Creates the tables for the database and inserts some example data into it"""
+	db = get_db()
+	with app.open_resource('./database/schema.sql', mode='r') as f:
+		db.cursor().executescript(f.read())
+	db.commit()
+
+
+def get_db():
+	"""Opens a new database connection if there is none yet for the
+		current application context.
+		"""
+	if not hasattr(g, 'thinkback.db'):
+		g.sqlite_db = connect_db()
+	return g.sqlite_db
