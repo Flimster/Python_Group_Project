@@ -5,14 +5,14 @@ from flask import g
 from flask import current_app as app
 from ..models import Problem, Assignment
 
-
+#Drops all database tables and erases all data
 def drop_db():
 	db = get_db()
 	with app.open_resource('./database/drop.sql', mode='r') as f:
 		db.cursor().executescript(f.read())
 	db.commit()
 
-
+#Creates the tables for the database and inserts some example data into it
 def init_db():
 	db = get_db()
 	with app.open_resource('./database/schema.sql', mode='r') as f:
@@ -35,7 +35,7 @@ def connect_db():
 	rv.row_factory = sqlite3.Row
 	return rv
 
-
+#Gets all assignments in the database and the problems for those assignments
 def get_assignments_with_problems():
 	assignment_list = get_db_assignments()
 	problem_list = get_db_problems()
@@ -45,7 +45,7 @@ def get_assignments_with_problems():
 				assignment.problem_list.append(problem)
 	return assignment_list
 
-
+#Gets all assignments from the database
 def get_db_assignments():
 	assignment_list = []
 	db = get_db()
@@ -56,7 +56,7 @@ def get_db_assignments():
 			assignment['a_id'], assignment['a_name'], assignment['a_active']))
 	return assignment_list
 
-
+#Gets all problems in the database
 def get_db_problems():
 	problem_list = []
 	db = get_db()
@@ -67,7 +67,7 @@ def get_db_problems():
 			problem['p_id'], problem['a_id'], problem['p_name'], problem['p_desc'], problem['p_solution_name']))
 	return problem_list
 
-
+#Gets a specific problem in the database determined by it's ID
 def get_single_problem(problem_id):
 	db = get_db()
 	cur = db.execute(
@@ -77,6 +77,7 @@ def get_single_problem(problem_id):
 					  entry['p_desc'], entry['p_solution_name'])
 	return problem
 
+
 def get_function_name(problem_id):
 	db = get_db()
 	cur = db.execute(
@@ -84,15 +85,15 @@ def get_function_name(problem_id):
 	entry = cur.fetchone()
 	return entry['p_solution_name']
 
-
+#Inserts a new problem into the db
 def insert_problem(assignment_id, problem_name, problem_desc, problem_solution_name):
 	params = (assignment_id, problem_name, problem_desc, problem_solution_name)
 	db = get_db()
-	cur = db.execute(
+	db.execute(
 		'insert into problems(a_id, p_name, p_desc, p_solution_name) VALUES (?,?,?,?)', params)
 	db.commit()
 
-
+#Gets the highest current Problem ID, so the one inserted to the DB will come after that one
 def get_max_problem_id():
 	db = get_db()
 	cur = db.execute('select MAX(p_id) from problems')
