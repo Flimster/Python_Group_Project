@@ -54,7 +54,7 @@ just break the code.
 
 ### Deployment
 
-It is not recommended to deploy the system on a live server since this program is in it's early alpha stage, and has not gone trough extensive security testing.
+It is not recommended to deploy the system on a live server since this program is in it's early alpha stage, and has not gone through extensive security testing.
 
 ### Authors
 
