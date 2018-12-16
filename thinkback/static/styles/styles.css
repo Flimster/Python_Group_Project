@@ -163,3 +163,7 @@ body {
 .create_problem {
   padding-left: 25px;
 }
+
+.list-group {
+  width: 40%
+}
