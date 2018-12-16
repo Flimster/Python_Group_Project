@@ -1,6 +1,6 @@
 # How to create new problems
 
-The Thinkback system expectes solutions to be of a specific format
+The Thinkback system expects your solution to be in a specific format.
 An example for a solution can be found below, this specific problem asks for two numbers **a, b** and returns the sum of those numbers.
 
 ---
@@ -31,7 +31,6 @@ class Solution(unittest.TestCase):
 		
 ```
 ---
-
-It is important to note that the class must inherit ```python unittest.TestCase``` to be able to run the tests.
-The class name and functions name must be the same in your upload for the problem.
-The ```python _correct function``` contains your correct implementation of the problem.
+The file you upload must be named **correct.py** and it is important to note that the class name must be **Solution** and it must inherit the ```unittest.TestCase``` class to be able to run the tests.
+Every function should have the same name as the example above.
+The ```_correct``` function contains your correct implementation of the problem.
