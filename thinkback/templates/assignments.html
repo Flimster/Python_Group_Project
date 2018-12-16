@@ -21,9 +21,11 @@
                     <h3>&#9679 <a href="{{ url_for('/assignments.get_problems', link=assignment.active, problem_id=problem.id) }}">{{problem.name}}</a></h3>
                 </div>
                 {% endfor %}
+
                 {% if flag %}
-                    <a class="create_problem" href="{{ url_for('/assignments.create_assignment', assignment_id = assignment.id)}}">Create new problem</a>
+                    <a class="create_problem" href="{{ url_for('/assignments.create_assignment', assignment_id = assignment.id)}}">Create new problem (Teachers only, please)</a>
                 {% endif %}
+              
             </div>
             {% endfor %}
         {% endblock %}
