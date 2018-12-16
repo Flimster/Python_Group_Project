@@ -17,6 +17,7 @@ upload_blueprint = Blueprint('upload', __name__)
 
 @upload_blueprint.route('/<link>/<problem_id>', methods=['POST'])
 def upload_file(link, problem_id):
+    """Uploads a file submission"""
     if request.method == 'POST':
         problem = database.get_single_problem(problem_id)
 
