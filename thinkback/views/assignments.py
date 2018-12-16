@@ -1,8 +1,9 @@
 # thinkback/views/assignments.py
+
 from ..database import database
 from flask import current_app as app
-from flask import Blueprint, render_template
 from ..models import Assignment, Problem
+from flask import Blueprint, render_template
 
 assignment_blueprint = Blueprint('/assignments', __name__)
 
