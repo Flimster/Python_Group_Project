@@ -52,6 +52,8 @@ If, for some reason, you don't feel like making the solutions yourself for the e
 we have mode them for you. They can be found in the 'solutions' folder and if you want to test to see how the system reacts to wrong answers or function names,
 just break the code.
 
+If you want to create a new problem, the 'solutions' folder contains a file called **correct.py** which contains everything needed for a new problem and the file **solution_to_uploaded_problem.py** contains the solution to the uploaded problem.
+
 ### Deployment
 
 It is not recommended to deploy the system on a live server since this program is in it's early alpha stage, and has not gone through extensive security testing.
