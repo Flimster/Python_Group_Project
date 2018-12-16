@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<title>ThinkBack</title>
+{% block head %}
+{% endblock %}
+</head>
+<body>
+
+<div class="navbar_t">
+  <a href="{{ url_for('index') }}">Home</a>
+    <div class="dropdown_t">
+        <button class="dropbtn_t" onclick="myFunction()">Assignments
+            <i class="fa fa-caret-down"></i>
+        </button>
+            <div class="dropdown-content_t" id="myDropdown">
+                <a href="{{ url_for('/assignments.get_assignment_path', link='active_assignments') }}">Active Assignments</a>
+                <a href="{{ url_for('/assignments.get_assignment_path', link='past_assignments') }}">Past Assignments</a>
+            </div>
+        </div>
+        <a href="{{ url_for('about.about_us')}}">About Us</a> 
+    </div>
+    <div class="banner" style="padding:15px; text-align:center;">
+        <div class="banner-content">
+            <h1>ThinkBack</h1>
+            <h3>Bringing people and code submissions together</h3>
+        </div>
+    </div> 
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="footer">
+        <a href="https://github.com/Flimster/Python_Group_Project">Ingi & Tyler</a>.
+    </div>
+    <script type=text/javascript src="{{url_for('static', filename='scripts/dropdown.js') }}"></script>
+    <script type=text/javascript src="{{url_for('static', filename='scripts/tabs.js') }}"></script>
+</body>
+</html>

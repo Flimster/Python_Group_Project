@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+{% extends "base.html" %}
+
+<head>
+
+</head>
+
+<body>
+    {% block content %}
+    <h3>If you haven't read the <a href="https://github.com/Flimster/Python_Group_Project/blob/stable/docs/upload.md">upload.md</a>, please do.</h3>
+    <form class="form-inline" action="{{ url_for('problem_upload.upload', assignment_id=assignment_id ) }}" method="POST"
+        enctype="multipart/form-data">
+        Problem Name:<br>
+        <input type="text" name="problem_name"><br>
+        Problem Description:<br>
+        <textarea name="problem_desc"></textarea><br><br>
+        Function Name:<br>
+        <input type="text" name="function_name"><br><br>
+
+        <input type="file" name="file"><br><br>
+
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    {% endblock %}
+</body>
+
+</html>

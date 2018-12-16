@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    {% extends "base.html" %}
+<head>
+
+</head>
+<body>
+    {% block content %}
+        <div class="tab">
+            {% if flag %} <h3 class="tab_header">Active Assignments</h3>
+            {% else %} <h3 class="tab_header">Past Assignments</h3>
+            {% endif %}
+            {% for item in assignment_list %}
+                <button class="tablinks" onClick="openAssignment(event, '{{ item.name }}')">{{ item.name }}</button>
+            {% endfor %}
+        </div>
+            {% for assignment in assignment_list %}
+            <div id="{{assignment.name}}" class="tabcontent">
+                {% for problem in assignment.problem_list %}
+                <div class="assignment_problem">
+                    <h3>&#9679 <a href="{{ url_for('/assignments.get_problems', link=assignment.active, problem_id=problem.id) }}">{{problem.name}}</a></h3>
+                </div>
+                {% endfor %}
+
+                {% if flag %}
+                    <a class="create_problem" href="{{ url_for('/assignments.create_assignment', assignment_id = assignment.id)}}">Create new problem (Teachers only, please)</a>
+                {% endif %}
+              
+            </div>
+            {% endfor %}
+        {% endblock %}
+</body>
+</html>

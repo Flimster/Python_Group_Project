@@ -1,0 +1,169 @@
+body {
+  margin: 0;
+}
+
+.navbar_t {
+  overflow: hidden;
+  background-color: #06425C;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar_t a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown_t {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown_t .dropbtn_t {
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar_t a:hover, .dropdown_t:hover .dropbtn_t, .dropbtn_t:focus {
+  background-color: rgb(151, 150, 150);
+}
+
+.dropdown-content_t {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content_t a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content_t a:hover {
+  background-color: #ddd;
+}
+
+.show_t {
+  display: block;
+}
+
+.content {
+  padding: 40px;
+}
+
+.footer {
+   position:fixed;
+   bottom:0;
+   left: 0;
+   width:100%;
+   height:40px;   /* Height of the footer */
+   background-color: #06425C;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+* {box-sizing: border-box}
+
+/* Style the tab */
+.tab {
+  border-radius: 10px;
+  float: left;
+  border: 1px solid  #06425C;;
+  background-color: rgb(211, 211, 211);
+  width: 17%;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+  color: black
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: rgb(158, 158, 158);
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: rgb(158, 158, 158);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  float: left;
+  border-radius: 10px;
+  padding: 10px; /*12px; */
+  border: 1px solid #ccc;
+  width: 50%;
+  /* border-left: none; */
+}
+
+.fileupload {
+  margin: 20px;
+}
+
+.problem {
+  margin-left: 100px;
+}
+
+.assignment_problem {
+  padding: 10px;
+}
+
+.tablinks {
+  border-radius: 10px
+}
+
+.about_us {
+  padding: 25px;
+}
+
+.tab_header {
+  text-align: center;
+  color: #06425C
+}
+
+.create_problem {
+  padding-left: 25px;
+}
+
+.list-group {
+  width: 40%
+}
