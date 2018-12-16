@@ -86,11 +86,11 @@ def get_function_name(problem_id):
 
 
 def insert_problem(assignment_id, problem_name, problem_desc, problem_solution_name):
+	params = (assignment_id, problem_name, problem_desc, problem_solution_name)
 	db = get_db()
 	cur = db.execute(
-		'insert into problems(a_id, p_name, p_desc, p_solution_name) values({}, {}, {}, {})'
-		.format(assignment_id, problem_name, problem_desc, problem_solution_name))
-	cur.commit()
+		'insert into problems(a_id, p_name, p_desc, p_solution_name) VALUES (?,?,?,?)', params)
+	db.commit()
 
 
 def get_max_problem_id():

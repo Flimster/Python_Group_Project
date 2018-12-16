@@ -29,7 +29,7 @@ def upload(assignment_id):
 		flash('The filename has to be correct.py')
 		return redirect(request.url)
 
-	path = os.path.join('./impl', '11')
+	path = os.path.join('./impl', str(database.get_max_problem_id() + 1))
 
 	if not os.path.exists(path):
 		os.makedirs(path)
