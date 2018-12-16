@@ -34,3 +34,5 @@ class Solution(unittest.TestCase):
 The file you upload must be named **correct.py** and it is important to note that the class name must be **Solution** and it must inherit the ```unittest.TestCase``` class to be able to run the tests.
 Every function should have the same name as the example above.
 The ```_correct``` function contains your correct implementation of the problem.
+
+Remember that the name of the function must be correct as the system searches for the name of the function you give it!
