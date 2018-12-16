@@ -1,5 +1,4 @@
 PRAGMA foreign_keys = ON;
-UPDATE sqlite_sequence SET seq = 0;
 
 create table assignments
 (
@@ -22,6 +21,8 @@ create table problems
 	p_desc text,
 	p_solution_name text
 );
+
+UPDATE sqlite_sequence SET seq = 0;
 
 insert into assignments(a_name, a_active) values ('Basics in Python', 1);
 insert into assignments(a_name, a_active) values ('Advanced Python pt. 1', 1);
