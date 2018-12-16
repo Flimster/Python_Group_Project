@@ -22,8 +22,12 @@ def get_assignment_path(link):
 @assignment_blueprint.route('/<link>/<problem_id>', methods=['GET'])
 def get_problems(link, problem_id):
     """Gets the problem for a specific assignment"""
-    problem = database.get_single_problem(problem_id)
-    return render_template('problem.html', link=link, problem=problem)
+    try:
+        problem = database.get_single_problem(problem_id)
+        return render_template('problem.html', link=link, problem=problem)
+    except:
+        return render_template('404.html')
+
 
 @assignment_blueprint.route('/<assignment_id>', methods=['GET'])
 def create_assignment(assignment_id):
