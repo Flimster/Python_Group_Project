@@ -18,7 +18,7 @@ You need to have the following installed: </br>
 
 Once you have those programs up and running, unzip the downloaded folder to the desired location. The next step is to set up a local server with flask. To do that you need to run the following commands in a terminal at the folder's directory:</br>
 
-`export FLASK_APP=thinkback.py`</br>
+`export FLASK_APP=thinkback/thinkback.py`</br>
 `flask run`</br>
 
 This will launch the server and host the website on your computer.</br>

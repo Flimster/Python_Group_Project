@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang=en>
+{% extends "base.html" %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    {% block content %}
+    <div class="about_us">
+        <h3>Ingi Þór Sigurðsson</h3>
+        <a href="mailto:ingis17@ru.is">Contact Ingi</a>
+        <p>Oversees: File uploading, database structure and connectivity, website functionality, code implementations, flask</p>
+        <h3>Tyler Elías Jones</h3>
+        <p>Oversees: Website design, website functionality, database implementation and connectivity, CSS and templates</p>
+        <a href="mailto:tylerj17@ru.is">Contact Tyler</a>
+    </div>
+    {% endblock %}
+</body>
+</html>

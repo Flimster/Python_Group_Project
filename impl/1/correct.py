@@ -7,8 +7,11 @@ class Solution(unittest.TestCase):
 	
 	def run_tests(self):
 		results = {}
-		expected = self._correct()
-		actual = self.func()
+		try:
+			actual = self.func()
+			expected = self._correct()
+		except TypeError as e:
+			return e
 		try:
 			self.assertEquals(expected, actual)
 			results[1] = "Correct"

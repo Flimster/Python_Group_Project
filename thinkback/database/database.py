@@ -83,3 +83,19 @@ def get_function_name(problem_id):
 		'select P.p_solution_name from Problems P where P.p_id = {}'.format(problem_id))
 	entry = cur.fetchone()
 	return entry['p_solution_name']
+
+
+def insert_problem(assignment_id, problem_name, problem_desc, problem_solution_name):
+	params = (assignment_id, problem_name, problem_desc, problem_solution_name)
+	db = get_db()
+	cur = db.execute(
+		'insert into problems(a_id, p_name, p_desc, p_solution_name) VALUES (?,?,?,?)', params)
+	db.commit()
+
+
+def get_max_problem_id():
+	db = get_db()
+	cur = db.execute('select MAX(p_id) from problems')
+	entry = cur.fetchone()
+	return entry['MAX(p_id)']
+	
