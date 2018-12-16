@@ -2,7 +2,7 @@
 import os
 from ..database import database
 from werkzeug.utils import secure_filename
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, request, flash, redirect, url_for
 
 problem_upload_blueprint = Blueprint('problem_upload', __name__)
 

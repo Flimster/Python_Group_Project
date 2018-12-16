@@ -1,7 +1,7 @@
 import os
 from .database import database
-from .views import about, assignments, upload, problem_upload
 from flask import Flask, render_template, g
+from .views import about, assignments, upload, problem_upload
 
 UPLOAD_FOLDER = './uploads'
 SOLUTIONS_FOLDER = './impl'
