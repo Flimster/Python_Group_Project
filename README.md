@@ -9,10 +9,10 @@ and refactoring.
 To get the website running on your local machine you need to follow these steps. </br>
 
 You need to have the following installed: </br>
-[SQLite](https://sqlite.org/index.html) </br>
-[python3](https://www.python.org/) </br>
-[pip](https://pip.pypa.io/en/stable/installing/) </br>
-[flask](http://flask.pocoo.org/)</br>
+[SQLite 3.26.0](https://sqlite.org/index.html) </br>
+[python3 3.7.1](https://www.python.org/) </br>
+[pip 18.1](https://pip.pypa.io/en/stable/installing/) </br>
+[flask 1.0.2](http://flask.pocoo.org/) </br>
 
 ## Installing
 
