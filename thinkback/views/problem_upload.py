@@ -2,21 +2,18 @@
 import os
 from ..database import database
 from werkzeug.utils import secure_filename
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, request, flash, redirect, url_for
 
 problem_upload_blueprint = Blueprint('problem_upload', __name__)
-
-# 7
 
 
 @problem_upload_blueprint.route('/<assignment_id>', methods=['POST'])
 def upload(assignment_id):
+	"""Upload a solution for a problem for a given assignment"""
+	
 	name = request.form['problem_name']
 	desc = request.form['problem_desc']
 	func_name = request.form['function_name']
-	a_id = assignment_id
-	# TODO: Get the current highest problem id
-	# Assume id 7
 
 	if 'file' not in request.files:
 		flash('No file was submitted')
