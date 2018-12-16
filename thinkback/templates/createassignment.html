@@ -8,6 +8,7 @@
 
 <body>
     {% block content %}
+    <h3>If you haven't read the <a href="https://github.com/Flimster/Python_Group_Project/blob/stable/docs/upload.md">upload.md</a>, please do.</h3>
     <form class="form-inline" action="{{ url_for('problem_upload.upload', assignment_id=assignment_id ) }}" method="POST"
         enctype="multipart/form-data">
         Problem Name:<br>
